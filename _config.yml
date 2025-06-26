@@ -1,0 +1,15 @@
+# GitHub Pages Configuration
+title: MINSOO, KIM - Android Developer
+description: Minsoo Kim - Android Developer with 15 years of experience
+url: https://kmshack.kr
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+theme: null
+
+# Exclude files from build
+exclude:
+  - README.md
+  - LICENSE
+  - .gitignore
