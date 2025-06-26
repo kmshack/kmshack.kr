@@ -1,0 +1,9 @@
+# Claude settings
+.claude/
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
