@@ -3,13 +3,20 @@ const themeToggleBtn = document.getElementById('theme-toggle-btn');
 const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 
 // Check for saved theme preference or default to system preference
-const currentTheme = localStorage.getItem('theme') || (prefersDarkScheme.matches ? 'dark' : 'light');
+const currentTheme = localStorage.getItem('theme');
 
 // Apply the theme
 if (currentTheme === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
-} else {
+} else if (currentTheme === 'light') {
     document.documentElement.removeAttribute('data-theme');
+} else {
+    // No saved preference, use system preference
+    if (prefersDarkScheme.matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+    }
 }
 
 // Theme toggle event listener
