@@ -124,7 +124,7 @@ section h2 {
 }
 
 .about p {
-    color: var(--text-secondary);
+    color: var(--text-color);
     margin-bottom: 0.8rem;
     font-size: 0.95rem;
     line-height: 1.7;
@@ -182,18 +182,6 @@ section h2 {
     color: var(--text-secondary);
     font-size: 0.95rem;
 }
-
-.project-section {
-    margin-bottom: 4rem;
-}
-
-.project-section h3 {
-    font-size: 1.125rem;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-    color: var(--text-color);
-}
-
 
 .theme-toggle {
     position: fixed;
