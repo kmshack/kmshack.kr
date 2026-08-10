@@ -111,7 +111,7 @@ button { font: inherit; }
 .availability { display: inline-flex; align-items: center; gap: 9px; min-height: 46px; padding: 0 20px; border: 1px solid var(--line-soft); border-radius: 999px; background: var(--bg-raised); color: var(--fg-muted); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
 .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-in-out infinite; }
 .portrait { width: clamp(144px, 17vw, 250px); margin: 0; }
-.portrait-frame { aspect-ratio: 1; overflow: hidden; border: 1px solid var(--line); background: var(--bg-raised); }
+.portrait-frame { aspect-ratio: 1; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--bg-raised); }
 .portrait img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.84) contrast(1.04); transition: transform .7s cubic-bezier(.16, 1, .3, 1), filter .35s ease; }
 .portrait:hover img { transform: scale(1.05); filter: saturate(1) contrast(1); }
 .portrait figcaption { margin-top: 12px; color: var(--fg-subtle); font-size: 10px; letter-spacing: .16em; text-align: right; text-transform: uppercase; }
