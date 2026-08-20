@@ -2,6 +2,7 @@
 title: MotionLayout으로 코드 없이 전환 효과 만들기
 tags: 안드로이드
 layout: post
+last_modified_at: 2018-10-12
 legacy: true
 ---
 

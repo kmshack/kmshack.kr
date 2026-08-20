@@ -1,5 +1,6 @@
 ---
 layout: post
+last_modified_at: 2016-09-30
 title: Stable ID로 RecyclerView 성능 개선하기
 tags: 안드로이드
 legacy: true

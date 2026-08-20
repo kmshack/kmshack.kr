@@ -2,6 +2,7 @@
 title: RecyclerView DiffUtil로 목록 업데이트 최적화하기
 tags: 안드로이드
 layout: post
+last_modified_at: 2017-04-06
 legacy: true
 ---
 

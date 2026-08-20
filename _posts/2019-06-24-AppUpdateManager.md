@@ -2,6 +2,7 @@
 title: AppUpdateManager로 인앱 업데이트 처리하기
 tags: [Play 스토어, 안드로이드]
 layout: post
+last_modified_at: 2019-06-24
 legacy: true
 ---
 

@@ -2,6 +2,7 @@
 title: ProcessLifecycleOwner로 앱의 Background/Foreground 상태 감지하기
 tags: [안드로이드, 아키텍처]
 layout: post
+last_modified_at: 2018-06-13
 legacy: true
 ---
 

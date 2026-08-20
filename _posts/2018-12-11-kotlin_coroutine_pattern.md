@@ -2,6 +2,7 @@
 title: Kotlin Coroutines 예외 처리 패턴
 tags: [안드로이드, 코틀린, 코루틴]
 layout: post
+last_modified_at: 2018-12-11
 legacy: true
 ---
 

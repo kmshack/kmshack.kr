@@ -1,5 +1,6 @@
 ---
 layout: post
+last_modified_at: 2017-03-08
 title: Android에서 TensorFlow 실행하기
 tags: 안드로이드
 legacy: true

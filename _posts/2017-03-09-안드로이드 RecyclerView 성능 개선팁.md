@@ -2,6 +2,7 @@
 title: Android RecyclerView 성능 개선 팁
 tags: 안드로이드
 layout: post
+last_modified_at: 2017-03-09
 legacy: true
 ---
 

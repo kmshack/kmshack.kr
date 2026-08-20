@@ -2,6 +2,7 @@
 title: Android 스타일과 테마 이해하기
 tags: 안드로이드
 layout: post
+last_modified_at: 2015-06-22
 legacy: true
 ---
 

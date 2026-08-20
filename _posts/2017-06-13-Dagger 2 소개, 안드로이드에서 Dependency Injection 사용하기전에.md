@@ -2,6 +2,7 @@
 title: "Dagger 2 소개: Android에서 의존성 주입을 사용하기 전에"
 tags: [안드로이드, 아키텍처]
 layout: post
+last_modified_at: 2017-06-13
 legacy: true
 ---
 

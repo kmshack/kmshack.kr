@@ -1,5 +1,6 @@
 ---
 layout: post
+last_modified_at: 2017-01-11
 title: Android Ripple Animation 구현하기
 tags: 안드로이드
 legacy: true

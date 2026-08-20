@@ -1,5 +1,6 @@
 ---
 layout: post
+last_modified_at: 2016-04-06
 title: Android VectorDrawable 이해하기
 tags: 안드로이드
 legacy: true

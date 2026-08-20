@@ -2,6 +2,7 @@
 title: Kotlin Coroutines로 Retrofit2 요청 동시에 처리하기
 tags: [안드로이드, 코틀린]
 layout: post
+last_modified_at: 2018-05-12
 legacy: true
 ---
 

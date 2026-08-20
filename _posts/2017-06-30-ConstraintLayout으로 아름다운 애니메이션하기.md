@@ -2,6 +2,7 @@
 title: ConstraintLayout으로 전환 애니메이션 만들기
 tags: 안드로이드
 layout: post
+last_modified_at: 2017-06-30
 legacy: true
 ---
 

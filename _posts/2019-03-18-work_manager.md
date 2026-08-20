@@ -2,6 +2,7 @@
 title: WorkManager로 정기적인 백그라운드 작업 수행하기
 tags: 안드로이드 서비스
 layout: post
+last_modified_at: 2019-03-18
 legacy: true
 ---
 

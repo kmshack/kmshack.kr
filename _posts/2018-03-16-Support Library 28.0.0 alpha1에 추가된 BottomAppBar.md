@@ -2,6 +2,7 @@
 title: Support Library 28.0.0 alpha1의 BottomAppBar 살펴보기
 tags: 안드로이드
 layout: post
+last_modified_at: 2018-03-16
 legacy: true
 ---
 

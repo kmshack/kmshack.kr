@@ -1,5 +1,6 @@
 ---
 layout: post
+last_modified_at: 2016-09-21
 title: Android Support Annotation 활용하기
 tags: 안드로이드
 legacy: true
