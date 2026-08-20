@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,7 +70,7 @@
                 <h1 id="hero-title" class="hero-title"><span class="line-mask"><span class="hero-line hero-line-one">MINSOO</span></span><span class="line-mask"><span class="hero-line hero-line-two">KIM<span class="accent">.</span></span></span></h1>
                 <p class="hero-tagline reveal">Eat. Sleep. <strong data-rotator>Build.</strong> <span aria-hidden="true">🤘</span></p>
                 <div class="hero-actions reveal">
-                    <a class="button button-solid" href="https://blog.kmshack.kr" target="_blank" rel="noopener">Read the blog <span aria-hidden="true">↗</span></a>
+                    <a class="button button-solid" href="/blog/">Read the blog <span aria-hidden="true">→</span></a>
                     <a class="button button-outline" href="https://github.com/kmshack" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
                     <span class="availability"><span class="status-dot"></span>Open to talks &amp; collabs</span>
                 </div>
@@ -104,7 +106,7 @@
                         <div><dt>Currently</dt><dd>Independent — indie apps &amp; writing</dd></div>
                         <div><dt>Previously</dt><dd>Kakao · Neowiz Internet</dd></div>
                         <div><dt>Obsessed with</dt><dd>Motion, startup time, empty states</dd></div>
-                        <div><dt>Writes at</dt><dd><a href="https://blog.kmshack.kr" target="_blank" rel="noopener">blog.kmshack.kr ↗</a></dd></div>
+                        <div><dt>Writes at</dt><dd><a href="/blog/">kmshack.kr/blog →</a></dd></div>
                     </dl>
                 </div>
             </section>
@@ -160,14 +162,11 @@
             </section>
 
             <section id="writing" class="content-section" data-section="writing" aria-labelledby="writing-title">
-                <div class="section-heading section-heading-split reveal"><div><span>05</span><h2 id="writing-title">Writing</h2></div><a class="quiet-link" href="https://blog.kmshack.kr/archive" target="_blank" rel="noopener">All posts ↗</a></div>
+                <div class="section-heading section-heading-split reveal"><div><span>05</span><h2 id="writing-title">Writing</h2></div><a class="quiet-link" href="/blog/archive/">All posts →</a></div>
                 <div class="post-list">
-                    <a class="post-row reveal" href="https://blog.kmshack.kr/ai-leverage/" target="_blank" rel="noopener"><time datetime="2026-07-31">2026.07.31</time><strong>AI 시대, 당신의 통장 잔고가 그대로인 진짜 이유</strong><span>AI · 비즈니스</span></a>
-                    <a class="post-row reveal" href="https://blog.kmshack.kr/AppUpdateManager/" target="_blank" rel="noopener"><time datetime="2019-06-24">2019.06.24</time><strong>AppUpdateManager를 이용한 앱 업데이트 처리</strong><span>Android</span></a>
-                    <a class="post-row reveal" href="https://blog.kmshack.kr/work_manager/" target="_blank" rel="noopener"><time datetime="2019-03-18">2019.03.18</time><strong>WorkManager로 정기적인 백그라운드 작업 수행하기</strong><span>Android</span></a>
-                    <a class="post-row reveal" href="https://blog.kmshack.kr/ViewPager2/" target="_blank" rel="noopener"><time datetime="2019-02-18">2019.02.18</time><strong>ViewPager2 맛보기</strong><span>Android</span></a>
-                    <a class="post-row reveal" href="https://blog.kmshack.kr/kotlin_coroutine_pattern/" target="_blank" rel="noopener"><time datetime="2018-12-11">2018.12.11</time><strong>Kotlin Coroutines 사용 패턴</strong><span>Kotlin</span></a>
-                    <a class="post-row reveal" href="https://blog.kmshack.kr/motionlayout/" target="_blank" rel="noopener"><time datetime="2018-10-12">2018.10.12</time><strong>MotionLayout을 통한 코드 한줄 없이 전환효과 주기</strong><span>Motion</span></a>
+                    {% for post in site.posts limit: 6 %}
+                    <a class="post-row reveal" href="{{ post.url }}"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time><strong>{{ post.title }}</strong><span>{{ post.tags | first | default: "Writing" }}</span></a>
+                    {% endfor %}
                 </div>
             </section>
         </div>
@@ -183,7 +182,7 @@
                 <a class="button button-outline" href="https://github.com/kmshack" target="_blank" rel="noopener">GitHub ↗</a>
                 <a class="button button-outline" href="https://x.com/kmshack_kr" target="_blank" rel="noopener">X ↗</a>
                 <a class="button button-outline" href="https://threads.net/@kmshack" target="_blank" rel="noopener">Threads ↗</a>
-                <a class="button button-outline" href="https://blog.kmshack.kr" target="_blank" rel="noopener">Blog ↗</a>
+                <a class="button button-outline" href="/blog/">Blog →</a>
             </div>
             <div class="footer-meta"><span>© 2026 Minsoo Kim</span><span>No cookies. No newsletter. Just apps.</span><a href="#top">Back to top ↑</a></div>
         </div>

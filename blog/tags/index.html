@@ -1,0 +1,18 @@
+---
+layout: page
+title: Tags
+eyebrow: TOPICS
+description: Android, Kotlin, UI/UX, AI와 제품 개발 글을 주제별로 찾아보세요.
+permalink: /blog/tags/
+---
+<nav class="tag-index" aria-label="태그 목록">
+    {% for tag in site.tags %}<a href="#tag-{{ tag[0] | slugify }}"><span>{{ tag[0] }}</span><small>{{ tag[1] | size }}</small></a>{% endfor %}
+</nav>
+<div class="tag-groups">
+    {% for tag in site.tags %}
+    <section class="tag-group" id="tag-{{ tag[0] | slugify }}">
+        <header><h2>{{ tag[0] }}</h2><span>{{ tag[1] | size }}편</span></header>
+        <div>{% for post in tag[1] %}<a href="{{ post.url }}"><span>{{ post.title }}</span><time>{{ post.date | date: '%Y.%m.%d' }}</time></a>{% endfor %}</div>
+    </section>
+    {% endfor %}
+</div>

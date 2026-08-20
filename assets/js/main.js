@@ -17,7 +17,7 @@
     }
 
     const savedTheme = localStorage.getItem('kms-theme');
-    setTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+    setTheme(savedTheme || 'light');
 
     themeToggle.addEventListener('click', function () {
         setTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');

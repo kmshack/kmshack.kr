@@ -1,8 +1,29 @@
 # GitHub Pages Configuration
-title: MINSOO, KIM - Android Developer
-description: Minsoo Kim - Android Developer with 15 years of experience
+title: MINSOO KIM — Android Engineer
+description: Minsoo Kim의 Android 개발, UI/UX, 생산성과 제품 개발 기록
 url: https://kmshack.kr
 baseurl: ""
+lang: ko-KR
+locale: ko_KR
+timezone: Asia/Seoul
+author: Minsoo Kim
+author_url: https://kmshack.kr
+keywords: [안드로이드, 앱 개발, UI/UX, 코틀린, 생산성, 제품 개발]
+
+# Blog
+permalink: /blog/:title/
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+feed:
+  path: /blog/feed.xml
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: true
 
 # Build settings
 markdown: kramdown
@@ -13,3 +34,5 @@ exclude:
   - README.md
   - LICENSE
   - .gitignore
+  - design-qa.md
+  - CLAUDE.md

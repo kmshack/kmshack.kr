@@ -1,0 +1,27 @@
+{% assign structured_description = page.description | default: page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 %}
+{% if page.layout == 'post' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ structured_description | jsonify }},
+  "url": {{ site.url | append: page.url | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
+  "author": {"@type": "Person", "name": {{ site.author | jsonify }}, "url": {{ site.author_url | jsonify }}},
+  "inLanguage": {{ site.lang | jsonify }},
+  "keywords": {{ page.tags | jsonify }}{% if page.image %},
+  "image": [{{ site.url | append: page.image | jsonify }}]{% endif %}
+}
+</script>
+{% else %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":{{ page.title | default: 'Writing' | jsonify }},"description":{{ structured_description | jsonify }},"url":{{ site.url | append: page.url | jsonify }},"inLanguage":{{ site.lang | jsonify }}}
+</script>
+{% endif %}
+{% if page.faqs %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{% for faq in page.faqs %}{"@type":"Question","name":{{ faq.question | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ faq.answer | jsonify }}}}{% unless forloop.last %},{% endunless %}{% endfor %}]}
+</script>
+{% endif %}

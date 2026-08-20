@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'ko-KR' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0b">
+    {% assign meta_description = page.description | default: page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 %}
+    <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ meta_description | escape }}">
+    <meta name="author" content="{{ site.author }}">
+    <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+    <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.url }}/blog/feed.xml">
+    <meta property="og:locale" content="{{ site.locale }}">
+    <meta property="og:site_name" content="{{ site.title | escape }}">
+    <meta property="og:title" content="{{ page.title | default: 'Writing' | escape }}">
+    <meta property="og:description" content="{{ meta_description | escape }}">
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    {% if page.image %}<meta property="og:image" content="{{ site.url }}{{ page.image }}">{% endif %}
+    <meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}">
+    <meta name="twitter:title" content="{{ page.title | default: 'Writing' | escape }}">
+    <meta name="twitter:description" content="{{ meta_description | escape }}">
+    {% if page.image %}<meta name="twitter:image" content="{{ site.url }}{{ page.image }}">{% endif %}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Noto+Sans+KR:wght@400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/blog.css">
+    <script>
+      (function () {
+        var saved = localStorage.getItem('kms-theme');
+        var theme = saved || 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      }());
+    </script>
+    {% include blog-structured-data.html %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QR5KSRPTYH"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-QR5KSRPTYH');</script>
+</head>
+<body class="blog-page">
+    <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+    <div class="site-grid" aria-hidden="true"></div>
+    <div class="scroll-progress" data-progress></div>
+
+    <header class="site-header">
+        <div class="shell header-inner">
+            <a class="wordmark" href="/" aria-label="Minsoo Kim 홈">
+                <span>MINSOO KIM</span><small>.KR</small>
+            </a>
+            <nav class="desktop-nav" aria-label="주요 메뉴">
+                <a href="/">Home</a>
+                <a href="/blog/" {% if page.url == '/blog/' %}class="is-active" aria-current="page"{% endif %}>Blog</a>
+                <a href="/blog/archive/" {% if page.url == '/blog/archive/' %}class="is-active" aria-current="page"{% endif %}>Archive</a>
+                <a href="/blog/tags/" {% if page.url == '/blog/tags/' %}class="is-active" aria-current="page"{% endif %}>Tags</a>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" type="button" data-theme-toggle aria-label="밝은 테마로 전환">
+                    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9c0-4.97-4.03-9-9-9Zm0 16V5a7 7 0 0 1 0 14Z" fill="currentColor"/></svg>
+                </button>
+                <a class="button button-small button-solid" href="/blog/feed.xml">RSS</a>
+                <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="메뉴 열기"><span></span><span></span></button>
+            </div>
+        </div>
+        <nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="모바일 메뉴">
+            <a href="/">Home <span>01</span></a>
+            <a href="/blog/">Blog <span>02</span></a>
+            <a href="/blog/archive/">Archive <span>03</span></a>
+            <a href="/blog/tags/">Tags <span>04</span></a>
+        </nav>
+    </header>
+
+    <main id="main" class="blog-main">{{ content }}</main>
+
+    <footer class="blog-footer">
+        <div class="shell footer-meta">
+            <span>© {{ site.time | date: '%Y' }} Minsoo Kim</span>
+            <nav aria-label="외부 링크"><a href="mailto:kmshack@naver.com">Email</a><a href="https://www.linkedin.com/in/kmshack" rel="noopener">LinkedIn</a><a href="https://x.com/kmshack_kr" rel="noopener">X</a><a href="/blog/feed.xml">RSS</a></nav>
+            <a href="#main">Back to top ↑</a>
+        </div>
+    </footer>
+    <script src="/assets/js/blog.js" defer></script>
+</body>
+</html>

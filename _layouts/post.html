@@ -1,0 +1,32 @@
+---
+layout: blog
+---
+<article class="blog-post shell" itemscope itemtype="https://schema.org/BlogPosting" data-post>
+    <div class="reading-toolbar">
+        <a class="back-link" href="/blog/">← 글 목록</a>
+        <div class="reading-progress" aria-label="읽기 진행률"><span data-reading-progress></span></div>
+        <span class="progress-label" data-reading-progress-label>0%</span>
+        <button class="text-button" type="button" data-copy-link>링크 복사</button>
+    </div>
+    <div class="post-layout">
+        <aside class="toc-panel" data-toc-panel>
+            <p class="blog-eyebrow">CONTENTS</p>
+            <nav aria-label="본문 목차"><ol class="toc-list" data-toc-list></ol></nav>
+            <a class="top-link" href="#main">맨 위로 ↑</a>
+        </aside>
+        <div class="post-column">
+            <header class="post-header">
+                <div class="post-tags">{% for tag in page.tags %}<a href="/blog/tags/#tag-{{ tag | slugify }}">{{ tag }}</a>{% endfor %}</div>
+                <h1 itemprop="headline">{{ page.title }}</h1>
+                <div class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: '%Y.%m.%d' }}</time><span>·</span><span data-reading-time>읽는 시간 계산 중</span><span>·</span><span itemprop="author">{{ site.author }}</span></div>
+            </header>
+            <div class="entry" itemprop="articleBody">{{ content }}</div>
+            <div class="post-actions"><button class="text-button" type="button" data-copy-link>링크 복사</button><a class="text-button" href="https://x.com/intent/post?text={{ page.title | uri_escape }}%20{{ site.url }}{{ page.url }}" target="_blank" rel="noopener">X 공유</a></div>
+            <nav class="post-pagination" aria-label="게시물 탐색">
+                {% if page.previous.url %}<a rel="prev" href="{{ page.previous.url }}"><span>이전 글</span><strong>{{ page.previous.title | escape }}</strong><time>{{ page.previous.date | date: '%Y.%m.%d' }}</time></a>{% endif %}
+                {% if page.next.url %}<a rel="next" href="{{ page.next.url }}"><span>다음 글</span><strong>{{ page.next.title | escape }}</strong><time>{{ page.next.date | date: '%Y.%m.%d' }}</time></a>{% endif %}
+            </nav>
+            {% if page.comments %}{% include disqus.html %}{% endif %}
+        </div>
+    </div>
+</article>
