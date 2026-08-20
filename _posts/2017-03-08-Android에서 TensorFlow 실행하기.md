@@ -2,28 +2,28 @@
 layout: post
 title: Android에서 TensorFlow 실행하기
 tags: 안드로이드
-comments: true
+legacy: true
 ---
 
-Google은 기계 학습을 구현하기 위해 Android에서 사용할 수있는 TensorFlow라는 라이브러리를 오픈 소스로 제공합니다. TensorFlow는 Google에서 제공하는 Machine Intelligence 용 오픈 소스 소프트웨어 라이브러리입니다.  
+TensorFlow는 Google이 공개한 오픈 소스 머신러닝 라이브러리다. 이 글에서는 사전 학습된 모델을 Android에서 실행하기 위해 TensorFlow의 네이티브 라이브러리와 Java API를 빌드하는 과정을 살펴본다.  
 
-인터넷을 많이 검색했지만 Android 용 TensorFlow를 만드는 간단한 방법이나 간단한 예제를 찾지 못했습니다. 알려진 정보를 토대로 잘 조합하여 빌드 할 수 있게 되었습니다. 이런 과정들을 다른사람들도 쉽게 이해 할 수 있도록 공유하기위해 글을 쓰게 되었습니다.  
+인터넷을 많이 검색했지만 Android 용 TensorFlow를 만드는 간단한 방법이나 간단한 예제를 찾지 못했습니다. 알려진 정보를 토대로 잘 조합하여 빌드 할 수 있게 되었습니다. 이런 과정들을 다른 사람들도 쉽게 이해 할 수 있도록 공유하기 위해 글을 쓰게 되었습니다.  
 
-이 글은 이미 기계 학습에 익숙하고 기계 학습을위한 모델 구축 방법을 알고있는 사람을 위해 작성된 글입니다. (예제에서는 사전 훈련 된 모델을 사용합니다). 기계 학습을 하기위한 벙법은 이미 많이 널려있으니 참고하시길 바랍니다.  
+이 글은 머신러닝 모델의 기본 개념을 알고 있는 독자를 대상으로 하며, 예제에서는 사전 학습된 모델을 사용한다.  
 
 <br>
 ## Android용 TensorFlow 빌드하기  
 <br>
-**몇가지 알아두어야할 사항**
+**몇 가지 알아두어야할 사항**
 
 - TensorFlow의 핵심은 C++로 작성되었습니다.
 - 안드로이드 용으로 빌드하려면 JNI(Java Native Interface)를 사용하여 loadModel, getPredictions 등과 같은 C++ 함수를 호출해야합니다.
-- JAVA API를 호출하여 작업을 쉽게사용 하기위해 C++ 컴파일 된 파일 인 .so (공유 객체) 파일과 네이티브 C++을 호출 할 JAVA API로 구성된 jar 파일을 갖습니다.
+- JAVA API를 호출하여 작업을 쉽게사용 하기 위해 C++ 컴파일 된 파일 인 .so (공유 객체) 파일과 네이티브 C++을 호출할 JAVA API로 구성된 jar 파일을 갖습니다.
 - jar (자바 API)와 .so (C++ 컴파일 된) 파일이 필요합니다.
 - 사전 훈련 된 모델 파일과 분류를 위한 라벨 파일이 필요합니다.  
 
 개체를 탐지 할 수 있는 예제를 만들어 보겠습니다.  
-먼저 jar와 .so 파일을 만들어 봅시다. TensorFlow를 JAVA기반의 안드로이드에서 작동 하기위해 so파일로 빌드하고 interface역할을 하기위해 jar이 필요합니다.
+먼저 jar와 .so 파일을 만들어 봅시다. TensorFlow를 JAVA기반의 안드로이드에서 작동 하기 위해 so파일로 빌드하고 interface역할을 하기 위해 jar이 필요합니다.
 
 <br>
 **필요한 툴**
@@ -102,8 +102,8 @@ bazel build //tensorflow/contrib/android:android_tensorflow_inference_java
 `compile files('libs/libandroid_tensorflow_inference_java.jar’)`  
 기본 디렉토리에 jniLibs 폴더를 만들고 `libtensorflow_inference.so`를 `jniLibs/armeabi-v7a/` 폴더에 넣습니다.  
 
-**3) 이제 TensorFlow Java API를 호출 할 수 있습니다.**  
-TensorFlow Java API는 TensorFlowInferenceface 클래스를 통해 필요한 모든 메소드를 제공합니다. TensorFlow Java API를 호출하여 모델경로를 지정하고, 예측을 얻기위해 이미지를 입력해보세요!  
+**3) 이제 TensorFlow Java API를 호출할 수 있습니다.**  
+TensorFlow Java API는 TensorFlowInferenceface 클래스를 통해 필요한 모든 메서드를 제공합니다. TensorFlow Java API를 호출하여 모델경로를 지정하고, 예측을 얻기위해 이미지를 입력해보세요!  
 
 <br>
 

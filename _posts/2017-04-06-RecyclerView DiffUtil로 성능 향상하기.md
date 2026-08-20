@@ -1,13 +1,11 @@
 ---
-title: RecyclerView DiffUtil로 성능 향상하기
+title: RecyclerView DiffUtil로 목록 업데이트 최적화하기
 tags: 안드로이드
 layout: post
-comments: true
+legacy: true
 ---
 
-이제 `notifyDataSetChanged()`는 더 이상사용을 중단하세요! 우리는 리스트를 매일 사용합니다. 사용자가 목록을 스크롤 할때 데이터를 업데이트 해야합니다. 이를 위해 서버에서 데이터를 가져와서 아이템을 업데이트 합니다.  
-
-이런 과정에서 지연이 길어지면 UX에 영향을 미치기 때문에 가능한 적은 리소스와 함께 빠른 작업이 이루어져야 합니다. 목록의 내용이 변경되면 `notifyDataSetChanged()`를 호출하여 아이템을 업데이트하지만 비용이 많이듭니다. RecyclerView에서 데이터를 업데이트 처리를 효율적으로 작업하기위해 `DiffUtil` 클래스가 개발되었습니다.  
+목록 전체를 다시 그리는 `notifyDataSetChanged()`는 변경 범위가 작을 때 불필요한 작업을 만든다. `DiffUtil`을 사용하면 이전 목록과 새 목록의 차이를 계산해 필요한 항목만 갱신할 수 있다. RecyclerView의 목록 업데이트를 효율적으로 처리하는 방법을 살펴본다.  
 
 <br>
 ## DiffUtil?
@@ -19,7 +17,7 @@ Eugene W. Myers’s의 차이 알고리즘을 이용하여 최소한의 업데�
 <br>
 ## 어떻게 사용하나?
 
-DiffUtil.Callback은 추상 클래스이며 두 목록 간의 차이를 계산하는 동안 DiffUtil에 의해 콜백 클래스로 사용됩니다. 4개의 추상 메소드와 1개의 비추상 메소드로 이루어져있습니다. 이를 확장하고 모든 메소드를 오버라이드해야 합니다.
+DiffUtil.콜백은 추상 클래스이며 두 목록 간의 차이를 계산하는 동안 DiffUtil에 의해 콜백 클래스로 사용됩니다. 4개의 추상 메서드와 1개의 비추상 메서드로 이루어져있습니다. 이를 확장하고 모든 메서드를 오버라이드해야 합니다.
 
 - getOldListSize(): 이전 목록의 개수를 반환합니다.  
 - getNewListSize(): 새로운 목록의 개수를 반환합니다.  
@@ -28,7 +26,7 @@ DiffUtil.Callback은 추상 클래스이며 두 목록 간의 차이를 계산�
 - getChangePayload(int oldItemPosition, int newItemPosition): 만약 `areItemTheSame()`이 true를 반환하고 `areContentsTheSame()`이 false를 반환하면 이 메서드가 호출되어 변경 내용에 대한 페이로드를 가져옵니다.  
 
 <br>
-다음은 `EmployeeRecyclerViewAdapter` 및 `EmployeeDiffCallback`에서 직원 목록을 정렬하는데 사용하는 간단한 `Employee`클래스입니다.
+다음은 `EmployeeRecyclerViewAdapter` 및 `EmployeeDiff콜백`에서 직원 목록을 정렬하는데 사용하는 간단한 `Employee`클래스입니다.
 
 ```java
 public class Employee {
@@ -38,7 +36,7 @@ public class Employee {
 }
 ```
 
-다음은 `Diff.Callback` 클래스의 구현입니다. `getChangePayload()`가 추상 메소드가 아님을 알 수 있습니다.
+다음은 `Diff.콜백` 클래스의 구현입니다. `getChangePayload()`가 추상 메서드가 아님을 알 수 있습니다.
 
 <br>
 
@@ -85,7 +83,7 @@ public class EmployeeDiffCallback extends DiffUtil.Callback {
 }
 ```
 
-DiffUtil.Callback 구현이 완료되면 아래 설명 된대로 RecyclerViewAdapter의 목록 변경사항을 업데이트 해야합니다.
+DiffUtil.콜백 구현이 완료되면 아래 설명 된대로 RecyclerViewAdapter의 목록 변경사항을 업데이트 해야합니다.
 
 <br>
 
@@ -120,12 +118,12 @@ DiffUtil은 RecyclerView.Adapter의 다양한 데이터 업데이트 메서드�
 - notifyItemRangeChanged()
 - notifyItemRangeInserted()
 - notifyItemRangeRemoved()
-- RecyclerView.Adapter 및 해당 메소드에 대한 자세한 내용은 여기에서 읽을 수 있습니다.
+- RecyclerView.Adapter 및 해당 메서드에 대한 자세한 내용은 여기에서 읽을 수 있습니다.
 
 <br>
 ## 중요
 
-목록이 많으면 작업에 상당한 시간이 걸릴 수 있으므로 백그라운드 스레드에서 실행하고 DiffUtil.DiffResult를 가져와서 메인스레드(UI스레드)의 RecyclerView에 적용세요. 또한 구현 제약으로 목록의 최대 크기는 2²⁶개로 제한되어 있습니다.  
+목록이 많으면 작업에 상당한 시간이 걸릴 수 있으므로 백그라운드 스레드에서 실행하고 DiffUtil.DiffResult를 가져와서 메인 스레드(UI 스레드)의 RecyclerView에 적용하세요. 또한 구현 제약으로 목록의 최대 크기는 2²⁶개로 제한되어 있습니다.  
 
 <br>
 ## 성능
@@ -136,4 +134,3 @@ DiffUtil은 두 목록 간의 추가 및 제거 작업의 최소 수를 찾기 �
 
 <br>
 더 많은 성능 수치를 보려면 [Android의 공식 페이지](https://developer.android.com/reference/android/support/v7/util/DiffUtil.html)를 살펴볼 수 있습니다. 위의 DiffUtil 예제의 참조 구현을 [GitHub](https://github.com/AnkitSinhal/DiffUtilExample)에서 찾을 수 있습니다.
-

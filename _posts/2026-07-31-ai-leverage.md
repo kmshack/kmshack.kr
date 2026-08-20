@@ -2,7 +2,6 @@
 layout: post
 title: AI 시대, 당신의 통장 잔고가 그대로인 진짜 이유
 tags: [AI, 비즈니스, 생산성]
-comments: true
 description: AI로 생산성이 높아져도 매출이 늘지 않는 이유와 의사결정, 사업 구조, 병목을 통해 진짜 레버리지를 찾는 방법을 정리합니다.
 image: /blog/images/2026-07-31-ai-leverage/ai-business-bottleneck.jpg
 last_modified_at: 2026-07-31

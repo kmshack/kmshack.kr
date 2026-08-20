@@ -2,7 +2,6 @@
 layout: post
 title: AI 시대에 개발자는 무엇을 만들어야 할까?
 tags: [AI, 개발자, 제품 개발]
-comments: true
 description: 구현 비용이 낮아진 AI 시대에 개발자가 어떤 문제를 고르고 무엇을 만들어야 하는지, 맥락과 완결성, 신뢰의 관점에서 살펴봅니다.
 last_modified_at: 2026-08-20
 ---

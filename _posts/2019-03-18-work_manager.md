@@ -2,18 +2,18 @@
 title: WorkManager로 정기적인 백그라운드 작업 수행하기
 tags: 안드로이드 서비스
 layout: post
-comments: true
+legacy: true
 ---
 
-Android O 부터 긴 작업의 백그라운드 서비스와 브로드캐스트는 재기능을 하지 않습니다. 따라서 백그라운드 작업을 구현하기위해서는 `WorkManager`를 선택할 수 밖에 없습니다.  
+Android O부터 백그라운드 서비스와 암시적 브로드캐스트에는 여러 제약이 적용된다. 즉시 실행할 필요는 없지만 완료가 보장되어야 하는 작업을 `WorkManager`로 예약하고, 주기적으로 실행하는 방법을 살펴본다.  
 
 <br>
 
-WokrManager는 Android Jetpack의 일부로 1.0.0버전으로 얼마전 공개되었습니다. Google은 이미 `JobScheduler`, `Firebase JobDispatcher`와 같은 백그라운드 작업을 위한 라이브러리를 수차례 공개하였습니다. 또한 Everonet의 `Android Job`이 있습니다. WorkManager는 이미 공개된 라이브러리보다 많은 장점이 있습니다.
+WorkManager는 Android Jetpack의 일부로 1.0.0버전으로 얼마전 공개되었습니다. Google은 이미 `JobScheduler`, `Firebase JobDispatcher`와 같은 백그라운드 작업을 위한 라이브러리를 수차례 공개하였습니다. 또한 Evernote의 `Android Job`이 있습니다. WorkManager는 이미 공개된 라이브러리보다 많은 장점이 있습니다.
 
-* 이전버전과의 호환성(API14이상 모두 지원)
-* GooglePlay Service에 대한 의존성이 없음
-* 체인기반의 작업 관리
+* 이전 버전과의 호환성(API14이상 모두 지원)
+* Google Play Service에 대한 의존성이 없음
+* 체인 기반의 작업 관리
 * 작업 상태 쿼리가능
   
 <br>
@@ -44,7 +44,7 @@ dependencies {
 ```
 
 <br>
-백그라운드에서 일부 작업을 실행하는 예제를 보도록하겠습니다. 현재 좌표를 하루에 두번씩 서버로 전송하는 예제이며, 몇가지 제약조건이 추가됩니다. 기기가 Wi-Fi에 연결되어 있고 저장 용량이 부족하지 않은 경우에만 작동합니다.
+백그라운드에서 일부 작업을 실행하는 예제를 보도록하겠습니다. 현재 좌표를 하루에 두번씩 서버로 전송하는 예제이며, 몇 가지 제약조건이 추가됩니다. 기기가 Wi-Fi에 연결되어 있고 저장 용량이 부족하지 않은 경우에만 작동합니다.
 
 
 ```java
@@ -110,7 +110,7 @@ fun startWork() {
 ```  
 
 <br>
-앞서 WorkManager의 장점으로 소개 했던 체인기반의 작업에 대해서도 알아 보겠습니다.   
+앞서 WorkManager의 장점으로 소개 했던 체인 기반의 작업에 대해서도 알아 보겠습니다.   
 
 ```java
 fun chainWorks(filter1: Work, filter2: Work, compress: Work, upload: Work) {
@@ -133,11 +133,11 @@ fun chainWorks(filter1: Work, filter2: Work, compress: Work, upload: Work) {
 
 
 <br>
-`Worker`는 우리가 원했던 작업구현 방식입니다. doWork() 메소드에서 필요한 작업을 구현하면 됩니다.  
+`Worker`는 우리가 원했던 작업구현 방식입니다. doWork() 메서드에서 필요한 작업을 구현하면 됩니다.  
 
 `WorkRequest`는 Worker의 arguments(입력된 데이터)와 constraints(네트워크 연결) 작업을 당담합니다.   
 
-`WorkManager`는 WorkRequest를 큐에 담고 작업을 시작합니다. 이 작업을 스케쥴링 하기위해 `Room 데이터베이스`에 저장 하는 가장 좋은 방법을 사용합니다. 이 작업 결과는 LiveData를 통해 전송됩니다.  
+`WorkManager`는 WorkRequest를 큐에 담고 작업을 시작합니다. 이 작업을 스케쥴링 하기 위해 `Room 데이터베이스`에 저장 하는 가장 좋은 방법을 사용합니다. 이 작업 결과는 LiveData를 통해 전송됩니다.  
 
 <br>
 ## 결론
@@ -149,7 +149,6 @@ WorkManager는 앱이 종료되거나 기기가 재시작되어도 실행되며,
 참고:  
 [https://medium.com/@RobertLevonyan/android-workmanager-manage-periodic-tasks-c13fa7744ebd](https://medium.com/@RobertLevonyan/android-workmanager-manage-periodic-tasks-c13fa7744ebd)
 [https://developer.android.com/topic/libraries/architecture/workmanager](https://developer.android.com/topic/libraries/architecture/workmanager)
-
 
 
 

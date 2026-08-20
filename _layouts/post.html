@@ -20,13 +20,18 @@ layout: blog
                 <h1 itemprop="headline">{{ page.title }}</h1>
                 <div class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: '%Y.%m.%d' }}</time><span>·</span><span data-reading-time>읽는 시간 계산 중</span><span>·</span><span itemprop="author">{{ site.author }}</span></div>
             </header>
+            {% if page.legacy %}
+            <aside class="legacy-note" aria-label="작성 시점 안내">
+                <strong>{{ page.date | date: '%Y' }}년에 작성된 글입니다.</strong>
+                <p>예제의 Support Library, Gradle 설정과 API 이름은 현재 AndroidX 및 최신 플랫폼과 다를 수 있습니다. 개념과 작성 당시의 맥락을 중심으로 읽어 주세요.</p>
+            </aside>
+            {% endif %}
             <div class="entry" itemprop="articleBody">{{ content }}</div>
             <div class="post-actions"><button class="text-button" type="button" data-copy-link>링크 복사</button><a class="text-button" href="https://x.com/intent/post?text={{ page.title | uri_escape }}%20{{ site.url }}{{ page.url }}" target="_blank" rel="noopener">X 공유</a></div>
             <nav class="post-pagination" aria-label="게시물 탐색">
                 {% if page.previous.url %}<a rel="prev" href="{{ page.previous.url }}"><span>이전 글</span><strong>{{ page.previous.title | escape }}</strong><time>{{ page.previous.date | date: '%Y.%m.%d' }}</time></a>{% endif %}
                 {% if page.next.url %}<a rel="next" href="{{ page.next.url }}"><span>다음 글</span><strong>{{ page.next.title | escape }}</strong><time>{{ page.next.date | date: '%Y.%m.%d' }}</time></a>{% endif %}
             </nav>
-            {% if page.comments %}{% include disqus.html %}{% endif %}
         </div>
     </div>
 </article>

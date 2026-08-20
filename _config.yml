@@ -23,7 +23,6 @@ defaults:
       type: posts
     values:
       layout: post
-      comments: true
 
 # Build settings
 markdown: kramdown

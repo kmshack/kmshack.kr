@@ -1,11 +1,11 @@
 ---
-title: ConstraintLayout으로 아름다운 애니메이션하기
+title: ConstraintLayout으로 전환 애니메이션 만들기
 tags: 안드로이드
 layout: post
-comments: true
+legacy: true
 ---
 
-ConstraintLayout은 날이 갈 수록 인기를 더해가고 있습니다. 수평적인 뷰 계층 구조와 성능을 향상시키고, 임의의 경계 규칙을 지원합니다. 이전 레이아웃의 단점을 모두해결 할 것입니다. ConstraintLayout의 이점 중 하나는 매우 적은 코드로 멋진 애니메이션을 수행 할 수 있습니다. 이는 대부분의 개발자들이 알지못하며, 공식 문서에도 아무것도 언급되어 있지 않습니다.  
+ConstraintLayout은 복잡한 뷰 계층을 줄이는 데 유용할 뿐 아니라, 서로 다른 Constraint 집합 사이를 전환하는 애니메이션에도 활용할 수 있다. `ConstraintSet`과 `TransitionManager`를 조합해 적은 코드로 레이아웃 변화를 애니메이션으로 표현하는 방법을 살펴본다.  
 <br>
 
 |:---------------:|
@@ -14,9 +14,9 @@ ConstraintLayout은 날이 갈 수록 인기를 더해가고 있습니다. 수�
 
 <br>
 ## 방법
-ConstraintLayout의 기본 사항을 알고 있다고 가정합니다 (예: `app:layout_constraintLeft_toLeftOf` 및 다른 속성). 대부분의 문서또는 사이트에서는 새로 개선 된 Android Studio 레이아웃 디자인 패널을 사용하여 다양한 Constraint를 드래그/드롭/시각화 하는 방법만 소개되어 있습니다. 애니메이션의 목적을 위해서는 Constraint를 정확하게 이해하고 있어야만 조작이 가능합니다.  
+ConstraintLayout의 기본 사항을 알고 있다고 가정합니다 (예: `app:layout_constraintLeft_toLeftOf` 및 다른 속성). 대부분의 문서 또는 사이트에서는 새로 개선 된 Android Studio 레이아웃 디자인 패널을 사용하여 다양한 Constraint를 드래그/드롭/시각화 하는 방법만 소개되어 있습니다. 애니메이션의 목적을 위해서는 Constraint를 정확하게 이해하고 있어야만 조작이 가능합니다.  
 
-가장 간단한 형식인 TransitionManager(API 19 이상 또는 서포트 라이브러리에서 사용가능)를 통해 두 가지 Constraint 집합간에 애니메이션을 적용 할 수 있습니다. 긴 설명 보다 간단한 예제를 살펴 보겠습니다.
+가장 간단한 형식인 TransitionManager(API 19 이상 또는 서포트 라이브러리에서 사용 가능)를 통해 두 가지 Constraint 집합 간에 애니메이션을 적용할 수 있습니다. 긴 설명 보다 간단한 예제를 살펴 보겠습니다.
 
 <br>
 ## 예제
@@ -119,7 +119,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 <br>
 
-이것은 전혀 새로운 방식이 아닙니다. Transition 프레임워크 또는 animateLayoutChanges와 같은 속성을 사용하여 동일한 작업을 수행 할 수 있습니다. 그러나 Constraint를 지정할 수 있기때문에 훤씬 강력합니다. 또 다른 이 점은 많은 요소를 애니메이션으로 만들려고 할 때입니다. 이 애니메이션을 살펴 보겠습니다.  
+이것은 전혀 새로운 방식이 아닙니다. Transition 프레임워크 또는 animateLayoutChanges와 같은 속성을 사용하여 동일한 작업을 수행할 수 있습니다. 그러나 Constraint를 지정할 수 있기 때문에 훨씬 강력합니다. 또 다른 이 점은 많은 요소를 애니메이션으로 만들려고 할 때입니다. 이 애니메이션을 살펴 보겠습니다.  
 
 [Robinhood](https://robinhood.com)가 ConstraintLayout을 사용하여 주문 애니메이션을 만듭니다. Robinhood (Android)의 주문 흐름 애니메이션입니다. 페이지의 모든 단일 요소(카드, 사용자 정의 키패드, FAB 등)를 수동으로 애니메이팅 하도록 구현되어 있습니다. 이 코드는 특히 앞뒤 애니메이션을 따로 작업한다는 점을 감안할 때 읽기에 약간의 문제가 있습니다.  
 
@@ -134,7 +134,7 @@ ConstraintLayout 애니메이션을 시작하는 데 사용하는 코드를 기�
 TransitionManager.beginDelayedTransition(constraintLayout)
 ```
 
-두번째 파라미터를 이용하여 애니메이션을 커스터마이징 할 수있습니다!(기본은 내부에 구현된 기본 Transition사용) 예를들어 애니메이션 속도를 쉽게 변경할 수 있습니다.  
+두 번째 매개변수로 애니메이션을 커스터마이징할 수 있다. 기본값은 내부에 구현된 Transition이며, 필요하면 애니메이션 속도 등을 변경할 수 있다.
 
 ```java
 val transition = AutoTransition()
@@ -145,10 +145,10 @@ TransitionManager.beginDelayedTransition(
 
 <br>
 ## 사소한주의 사항
-ConstraintLayout 애니메이션으로 사용해본 후, 나는 애니메이션을 구현할 때 고려해야 할 몇 가지주의 사항을 발견했습니다.
+ConstraintLayout 애니메이션으로 사용해 본 후, 나는 애니메이션을 구현할 때 고려해야 할 몇 가지주의 사항을 발견했습니다.
 
 
-1. ConstraintLayout은 핸들링하는 자식에 대한 속성변경을 알고 있기때문에 직접 자식에 대해서만 애니메이션을 수행합니다. 이는 중첩 된 ViewGroups인 경우 잘 처리 되지 않음을 의미합니다. 위의 예제에서 CardView 내부의 텍스트는 외부 ConstraintLayout에 의해 처리되지 않으므로 코드에서 수동으로 애니메이션을 적용해야합니다. 이것은 아마도 중첩 된 ConstraintLayout을 사용하여 해결할 수 있지만 여기서는 사용하지 않았습니다.
+1. ConstraintLayout은 핸들링하는 자식에 대한 속성변경을 알고 있기 때문에 직접 자식에 대해서만 애니메이션을 수행합니다. 이는 중첩된 ViewGroups인 경우 잘 처리 되지 않음을 의미합니다. 위의 예제에서 CardView 내부의 텍스트는 외부 ConstraintLayout에 의해 처리되지 않으므로 코드에서 수동으로 애니메이션을 적용해야합니다. 이것은 아마도 중첩된 ConstraintLayout을 사용하여 해결할 수 있지만 여기서는 사용하지 않았습니다.
 2. ConstraintLayout은 레이아웃 관련 변경 사항 만 애니메이션으로 나타냅니다. 대체 XML에서 다른 속성(예: `elevation`, `text`)을 읽을 수 없으며 프레임워크가 모든 것을 처리 합니다. `ConstraintSet.clone()`은 레이아웃/Constraint 변경 사항을 복사하고 다른 모든 항목은 삭제합니다.
 
 3. constraint-layout:1.0.2에서 ConstraintLayout 속성을 동적으로 변경하면 업데이트 된 속성을 고려하지 않고 애니메이션됩니다.(예: `translationY`). 즉, 애니메이션을 실행하면 변경전의 속성의 값으로 되돌아 간뒤 새로운 값으로 애니메이션이 적용됩니다.  
@@ -156,7 +156,7 @@ ConstraintLayout 애니메이션으로 사용해본 후, 나는 애니메이션�
 <br>
 ## 마치며
 
-ConstraintLayout을 사용하는 페이지에서 애니메이션을 구현할 함으로 Transition 프레임 워크 보다 많은 기본 레이아웃 변경 애니메이션을 수행 할 수 있습니다. 이를 통해 Activity/Fragment에서 UI/애니메이션 로직을 압축하고 XML로 통합 할 수 있습니다. 또한 더 읽기 쉬운 애니메이션 구조를 만듭니다.  
+ConstraintLayout을 사용하는 페이지에서 애니메이션을 구현할 함으로 Transition 프레임 워크 보다 많은 기본 레이아웃 변경 애니메이션을 수행할 수 있습니다. 이를 통해 Activity/Fragment에서 UI/애니메이션 로직을 압축하고 XML로 통합 할 수 있습니다. 또한 더 읽기 쉬운 애니메이션 구조를 만듭니다.  
 
 
 **아무도 코드로 작성된 방식의 애니메이션을 읽는 것을 좋아하지 않습니다.**

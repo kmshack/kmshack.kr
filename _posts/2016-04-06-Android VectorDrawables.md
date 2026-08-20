@@ -1,17 +1,17 @@
 ---
 layout: post
-title: Android VectorDrawables
+title: Android VectorDrawable 이해하기
 tags: 안드로이드
-comments: true
+legacy: true
 ---
 
-안드로이드 롤리팝에서 Vector방식의 Drawable을 사용 할 수 있는 VectorDrawable이 추가되었다. 구글의 안드로이드 Support Library 23.2부터 안드로이드 5.0 이하 버전에도 VectorDrawable을 지원한다.  
+Android 롤리팝에는 벡터 방식의 Drawable을 사용할 수 있는 `VectorDrawable`이 추가되었다. Support Library 23.2부터는 Android 5.0 미만 버전에서도 이를 사용할 수 있다.  
 
-픽셀 마다 색상 정보를 가지는 Bitmap과는 다르게 Vector방식은 Path정보를 통해 그래픽을 나타나게 된다. 이렇게 선과 선의 연결 정보를 가지고 있기때문에 정확한 크기정보를 가지고 있지않아 사이즈를 임의로 늘리거나 원하는 색상으로 변경해도 Bitmap처럼 뭉게지거나 깨지지 않는 장점이 존재하게 된다. 하지만 Bitmap처럼 복잡한 그래픽을 표현 하지는 못한다.  
+픽셀마다 색상 정보를 저장하는 Bitmap과 달리 VectorDrawable은 Path 정보로 그래픽을 표현한다. 크기를 바꾸어도 이미지가 쉽게 깨지지 않고 색상도 유연하게 변경할 수 있지만, Bitmap처럼 복잡한 그래픽을 표현하는 데에는 적합하지 않다.  
 
-안드로이드 5.0 발표 당시 구글이 머트리얼 디자인을 함께 발표 하였다. 이 머트리얼 디자인 가이드의 주된 요점은 요소를 “단순화” 한다는 점에서 Vector와 정확하게 일치 한다. 머트리얼 디자인 아이콘을 보더라도 Vector방식으로 모두 표현이 가능하다.  
+안드로이드 5.0 발표 당시 구글이 머티리얼 디자인을 함께 발표 하였다. 이 머티리얼 디자인 가이드의 주된 요점은 요소를 “단순화” 한다는 점에서 Vector와 정확하게 일치 한다. 머티리얼 디자인 아이콘을 보더라도 Vector 방식으로 모두 표현이 가능하다.  
 
-기존의 BitmapDrawble을 사용함으로 DPI별로 각각 다른 이미지 리소스를 준비 했다면 VectorDrawable을 활용 한다면 DPI별로 각각 다른 이미지를 준비 할 필요가 전혀 없어진다. 이미지 관리 갯수도 작아질 뿐만아니라 용량도 많이 줄것이다.  
+BitmapDrawable을 사용할 때는 DPI별 이미지 리소스를 준비해야 하지만, VectorDrawable을 활용하면 하나의 리소스로 여러 화면 밀도에 대응할 수 있다. 관리할 이미지 수와 앱 용량도 줄일 수 있다.
 
 <br>
 ```xml
@@ -42,7 +42,7 @@ c0-13.45-10.904-24.354-24.354-24.354l0,0c-13.451,0-24.354,10.904-24.354,24.354V2
 ```
 <br>
 
-Vector방식에서 가장 흔히 쓰이는 SVG 형식으로 아이콘을 제작하면 된다. 하지만 안드로이드에서는 SVG형식의 확장자를 바로 사용 할 수 없으며 VectorDrawable로 변환 해야한다. 최근 안드로이드 스튜디오에서는 SVG를 Import하면 자동으로 VectorDrawable 변경해주는 기능이 추가되어 쉽게 사용 할 수 있다. 위의 안드로이드 아이콘은 Path를 통해 SVG로 제작된 아이콘이다. 안드로이드에서 사용하기위해 아래와 같이 만들 수 있다.  
+벡터 그래픽에서 널리 쓰이는 SVG 형식으로 아이콘을 제작할 수 있다. Android에서는 SVG 파일을 직접 사용할 수 없으므로 VectorDrawable로 변환해야 한다. Android Studio의 Vector Asset 가져오기 기능을 사용하면 SVG를 VectorDrawable 리소스로 변환할 수 있다.  
 <br>
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -80,7 +80,7 @@ android:pathData="M372.734,297.598c0,13.45,10.903,24.354,24.354,24.354l0,0c13.45
 </vector>
 ```
 <br>  
-변형되는 xml은 SVG와 비슷한 구조로 부모 vector내에 path들이 존재하며 group을 통해서 path들을 묶어서 관리 할 수 있다. 이 SVG파일은 약 4kByte로 500×500의 Bitmap형식일때 25kByte 보다 약 6배이상 작은 공간을 차지한다. 사용법은 기존의 Drawable사용법과 동일하며 전혀 이질감 없이 VectorDrawable을 사용 할 수 있다.  
+변형되는 xml은 SVG와 비슷한 구조로 부모 vector내에 path들이 존재하며 group을 통해서 path들을 묶어서 관리 할 수 있다. 이 SVG파일은 약 4kByte로 500×500의 Bitmap형식일때 25kByte 보다 약 6배이상 작은 공간을 차지한다. 사용법은 기존의 Drawable사용법과 동일하며 전혀 이질감 없이 VectorDrawable을 사용할 수 있다.  
 
 ```xml
 <ImageView
@@ -91,6 +91,6 @@ android:pathData="M372.734,297.598c0,13.45,10.903,24.354,24.354,24.354l0,0c13.45
 ```  
 
 <br>
-이렇게 VectorDrawable은 구글의 최신 디자인인 머트리얼 디자인을 표현하기에 가장 적합한 그래픽요소이며, 기존의 BitmapDrawable방식을 사용함으로 DPI별로 리소스를 준비해야하는 문제점은 한번에 해결 해 줄 수 있다. 안드로이드 스튜디오를 통해 자동 Import도 지원하고 있어 한결 편하게 사용 할 수 있기때문에 이제 선택 아닌 필수로 사용해볼만 하다.
+이렇게 VectorDrawable은 구글의 최신 디자인인 머티리얼 디자인을 표현하기에 가장 적합한 그래픽 요소이며, 기존의 BitmapDrawable 방식을 사용함으로 DPI별로 리소스를 준비해야하는 문제점은 한번에 해결 해 줄 수 있다. 안드로이드 스튜디오를 통해 자동 Import도 지원하고 있어 한결 편하게 사용할 수 있기 때문에 이제 선택 아닌 필수로 사용해볼만 하다.
 
  

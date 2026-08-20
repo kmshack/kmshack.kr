@@ -1,13 +1,13 @@
 ---
-title: 안드로이드 RecyclerView 성능 개선팁
+title: Android RecyclerView 성능 개선 팁
 tags: 안드로이드
 layout: post
-comments: true
+legacy: true
 ---
 
-RecyclerView는 제한된 화면에서 큰 데이터 세트를 제공하기 위한 유연한 View입니다. RecyclerView는 안드로이드 앱 개발에 있어서 가장 중요한 위젯 중 하나인 ListView를 좀 더 발전시킨 버전입니다. 뉴스 피드나 연락처 목록을 구현 시 사용자가 빠르게 스크롤할 때 성능 문제 또는 불필요한 지연을 방지하기 위해 ListView를 사용했습니다. RecyclerView는 ListView의 성능과 지연을 100% 방지 못하는 문제점을 해결한 버전입니다.  
+RecyclerView는 제한된 화면에서 큰 데이터 집합을 효율적으로 보여 주기 위한 유연한 View다. 하지만 잘못된 애니메이션이나 과도한 갱신은 여전히 스크롤 성능을 떨어뜨릴 수 있다. 자주 놓치는 최적화 원칙을 항목별로 살펴본다.  
 
-이 글은 RecyclerView 사용방법에 관한 글이 아닙니다. RecyclerView를 사용하면서 유용한 정보와 중요한 규칙, 절대 하지 말아야 할 것을 하나씩 살펴보겠습니다.  
+이 글은 RecyclerView 사용 방법에 관한 글이 아닙니다. RecyclerView를 사용하면서 유용한 정보와 중요한 규칙, 절대 하지 말아야 할 것을 하나씩 살펴보겠습니다.  
 
 <br>
 ## 피할 수 있는 문제
@@ -44,7 +44,7 @@ class ColorViewHolder extends RecyclerView.ViewHolder implements View.OnClickLis
     }
 }
 ```
-이러한 간단한 규칙 3가지만으로도 RecyclerView의 성능은 보장됩니다.  
+이러한 간단한 규칙 세 가지만으로도 RecyclerView의 성능은 보장됩니다.  
 
 <br>
 **데이터 변경에 따른 쉬운 애니메이션 처리방법**
@@ -61,8 +61,8 @@ class ColorViewHolder extends RecyclerView.ViewHolder implements View.OnClickLis
 - 레이아웃 구조를 최적화 및 간단한 구조를 유지하세요.
 - 깊은 레이아웃 계층을 피하기 위해 [HierarchyViewer](https://developer.android.com/studio/profile/hierarchy-viewer.html)를 사용하세요.
 - [오버드로우 문제](https://developer.android.com/studio/profile/dev-options-overdraw.html)를 피하고 시스템 도구로 모니터링 하세요.
-- TextView에 긴 텍스트를 설정하지 마세요. 텍스트 줄을 계산하기위해 많은 연산이 필요하여 성능을 떨어집니다. 텍스트 끝 말줄임표나 최대 줄수를 설정 해두는 것도 하나의 방법입니다.
-- 렌더링 퍼포먼스를 향상하기위해 [LayoutManager.setItemPrefetchEnabled()](https://medium.com/google-developers/recyclerview-prefetch-c2f269075710#.psau15lh2)를 사용하세요.  
+- TextView에 긴 텍스트를 설정하지 마세요. 텍스트 줄을 계산하기 위해 많은 연산이 필요하여 성능을 떨어집니다. 텍스트 끝 말줄임표나 최대 줄수를 설정 해두는 것도 하나의 방법입니다.
+- 렌더링 퍼포먼스를 향상하기 위해 [LayoutManager.setItemPrefetchEnabled()](https://medium.com/google-developers/recyclerview-prefetch-c2f269075710#.psau15lh2)를 사용하세요.  
 
 
 <br>
