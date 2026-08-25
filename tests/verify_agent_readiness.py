@@ -355,7 +355,7 @@ def check_homepage(fetcher: Fetcher) -> None:
     check("json-ld: declares a WebSite", "WebSite" in types)
     check("json-ld: declares a ProfilePage", "ProfilePage" in types)
     if person:
-        for field in ("name", "url", "description", "jobTitle", "image", "sameAs"):
+        for field in ("name", "url", "description", "jobTitle", "image", "sameAs", "email"):
             check(f"json-ld: Person has {field}", bool(person.get(field)))
         check("json-ld: Person.sameAs lists profiles", len(person.get("sameAs", [])) >= 3)
 
@@ -377,8 +377,20 @@ def check_trust_pages(fetcher: Fetcher) -> None:
     privacy_text = text_of(privacy).lower()
     for term in ("analytics", "cookie", "localstorage", "github pages", "cloudflare"):
         check(f"trust: privacy notice covers {term}", term in privacy_text)
+    address = "kmshack@naver.com"
     _, _, contact = fetcher.get("/contact/")
-    check("trust: contact page publishes an address", "kmshack@naver.com" in contact)
+    _, _, contact_md = fetcher.get("/contact.md")
+    _, _, profile_json = fetcher.get("/api/profile.json")
+    check(
+        "trust: a contact address is machine-readable",
+        address in contact_md and address in profile_json,
+    )
+    warn(
+        "trust: contact page publishes the address in its HTML",
+        address in contact,
+        "Cloudflare Scrape Shield rewrites mailto links into /cdn-cgi/l/email-protection; "
+        "the address stays readable in /contact.md, /api/profile.json and the home page JSON-LD",
+    )
 
 
 def check_markdown(fetcher: Fetcher) -> None:
