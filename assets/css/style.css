@@ -229,7 +229,7 @@ button { font: inherit; }
     .mobile-nav.is-open a { min-height: 48px; opacity: 1; }
     .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 132px; }
     .hero-title { font-size: clamp(64px, 19vw, 120px); }
-    .portrait { width: min(52vw, 220px); justify-self: end; }
+    .portrait { width: min(52vw, 220px); justify-self: center; }
     .stats { grid-template-columns: repeat(2, 1fr); }
     .stat:nth-child(2) { border-right: 0; }
     .stat:nth-child(-n + 2) { border-bottom: 1px solid var(--line-soft); }
