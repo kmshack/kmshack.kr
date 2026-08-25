@@ -1,0 +1,26 @@
+---
+layout: null
+sitemap: false
+---
+{%- assign p = site.data.profile.person -%}
+{
+  "name": {{ p.name | jsonify }},
+  "alternate_names": {{ p.alternate_names | jsonify }},
+  "job_title": {{ p.job_title | jsonify }},
+  "headline": {{ p.headline | jsonify }},
+  "summary": {{ p.summary | jsonify }},
+  "status": {{ p.status | jsonify }},
+  "location": {
+    "locality": {{ p.location.locality | jsonify }},
+    "country": {{ p.location.country | jsonify }}
+  },
+  "languages": {{ p.languages | jsonify }},
+  "years_of_experience": {{ p.years_of_experience | jsonify }},
+  "email": {{ p.email | jsonify }},
+  "url": {{ p.url | jsonify }},
+  "image": {{ p.image | jsonify }},
+  "stats": {{ site.data.profile.stats | jsonify }},
+  "skills": {{ site.data.profile.skills | jsonify }},
+  "links": {{ site.data.profile.links | jsonify }},
+  "generated_at": {{ site.time | date_to_xmlschema | jsonify }}
+}

@@ -1,0 +1,9 @@
+---
+layout: null
+sitemap: false
+---
+{
+  "count": {{ site.data.profile.experience | size }},
+  "generated_at": {{ site.time | date_to_xmlschema | jsonify }},
+  "experience": {{ site.data.profile.experience | jsonify }}
+}

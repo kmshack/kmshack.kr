@@ -1,0 +1,12 @@
+# kmshack.kr — a personal portfolio and Android engineering blog.
+# Crawlers and AI agents are welcome on every path.
+User-agent: *
+Allow: /
+
+Sitemap: https://kmshack.kr/sitemap.xml
+
+# Machine-readable guides for agents:
+#   https://kmshack.kr/llms.txt        guided index, with when-to-use notes
+#   https://kmshack.kr/llms-full.txt   the same index with full article text
+#   https://kmshack.kr/openapi.json    OpenAPI 3.1 description of the JSON API
+#   https://kmshack.kr/api/index.json  API discovery document

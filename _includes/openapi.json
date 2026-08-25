@@ -1,0 +1,420 @@
+{%- assign api = site.data.api -%}
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": {{ api.title | jsonify }},
+    "version": {{ api.version | jsonify }},
+    "summary": {{ api.summary | jsonify }},
+    "description": "Read-only JSON API for kmshack.kr, the personal site of Minsoo Kim (김민수), an Android engineer in Seoul.\n\nUse it to look up who the site belongs to, what he has built, his career history, and the full index of the Korean-language Android engineering blog he has published since 2015.\n\nEvery endpoint is a static JSON document served from the CDN: `GET` only, no authentication, no query parameters, `Access-Control-Allow-Origin: *`. There is no quota, but the data changes at most a few times a month — cache responses and do not poll more than once per hour.\n\nError bodies follow the `Error` schema when a request is served by the site's edge worker; a request that misses the edge worker and hits the CDN directly returns the site's HTML 404 page instead.",
+    "termsOfService": "https://kmshack.kr/privacy/",
+    "contact": {
+      "name": "Minsoo Kim",
+      "url": "https://kmshack.kr/contact/",
+      "email": "kmshack@naver.com"
+    },
+    "license": {
+      "name": {{ api.license.name | jsonify }},
+      "url": {{ api.license.url | jsonify }}
+    }
+  },
+  "servers": [
+    { "url": "https://kmshack.kr", "description": "Production" }
+  ],
+  "security": [],
+  "externalDocs": {
+    "description": "Developer portal — endpoint reference, examples and agent guidance",
+    "url": "https://kmshack.kr/developers/"
+  },
+  "tags": [
+    { "name": "meta", "description": "Discovery documents: the API index and this specification." },
+    { "name": "identity", "description": "Who the site belongs to: profile, projects and career history." },
+    { "name": "content", "description": "The blog archive: posts and tags." }
+  ],
+  "x-rate-limit": {
+    "policy": "none",
+    "guidance": {{ api.rate_limit | jsonify }},
+    "cache-ttl-seconds": 3600
+  },
+  "paths": {
+    "/api/index.json": {
+      "get": {
+        "tags": ["meta"],
+        "operationId": "getApiIndex",
+        "summary": "Get the API index",
+        "description": "Returns the discovery document: every available endpoint with its operation id and description, plus the OpenAPI URL, licence and caching guidance. Start here when exploring the API for the first time.",
+        "responses": {
+          "200": {
+            "description": "The API discovery document.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApiIndex" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/api/profile.json": {
+      "get": {
+        "tags": ["identity"],
+        "operationId": "getProfile",
+        "summary": "Get the owner profile",
+        "description": "Returns the identity of the site owner — legal and alternate names, job title, headline summary, current status, city and country, spoken languages, years of experience, headline statistics, grouped skills and canonical social links. Use this to answer \"who is Minsoo Kim / kmshack\" or to resolve the entity behind kmshack.kr.",
+        "responses": {
+          "200": {
+            "description": "The profile of the site owner.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Profile" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/api/projects.json": {
+      "get": {
+        "tags": ["identity"],
+        "operationId": "listProjects",
+        "summary": "List projects",
+        "description": "Returns every product worked on, newest and most prominent first: indie Android apps built solo (with public download counts and store URLs) and professional apps shipped inside Kakao and Nowiz. Filter client-side on the `type` field to separate indie work from professional work.",
+        "responses": {
+          "200": {
+            "description": "The full project list.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ProjectList" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/api/experience.json": {
+      "get": {
+        "tags": ["identity"],
+        "operationId": "listExperience",
+        "summary": "List career history",
+        "description": "Returns the career timeline in reverse-chronological order, one entry per organization, with role, period, a summary of the work and the products shipped there. An entry whose `end` is null is ongoing.",
+        "responses": {
+          "200": {
+            "description": "The career timeline.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ExperienceList" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/api/posts.json": {
+      "get": {
+        "tags": ["content"],
+        "operationId": "listPosts",
+        "summary": "List blog posts",
+        "description": "Returns the complete blog index, newest first — every post published since 2015 with its slug, title, canonical URL, publication and modification dates, tags and a plain-text summary. Posts are written in Korean. Fetch the `url` of an entry to read the article itself; posts flagged `legacy` were written against older Android APIs and may be outdated.",
+        "responses": {
+          "200": {
+            "description": "The complete list of blog posts.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PostList" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/api/tags.json": {
+      "get": {
+        "tags": ["content"],
+        "operationId": "listTags",
+        "summary": "List blog tags",
+        "description": "Returns every tag used across the blog with its post count and the slugs of the posts carrying it. Use it to find the topics covered before fetching the full post list.",
+        "responses": {
+          "200": {
+            "description": "The full tag list.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TagList" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/openapi.json": {
+      "get": {
+        "tags": ["meta"],
+        "operationId": "getOpenApiSpec",
+        "summary": "Get this OpenAPI specification",
+        "description": "Returns this OpenAPI 3.1 document, so an agent that has found the site can load the machine-readable API contract without a second discovery step. Mirrored byte-for-byte at /api/openapi.json.",
+        "responses": {
+          "200": {
+            "description": "The OpenAPI 3.1 specification of this API.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/OpenApiSpec" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "NotFound": {
+        "description": "No such resource. Returned as JSON when the request is served by the site's edge worker.",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "ApiIndex": {
+        "type": "object",
+        "description": "Discovery document for the whole API.",
+        "required": ["api", "version", "endpoints"],
+        "properties": {
+          "api": { "type": "string", "description": "Human-readable API name.", "examples": ["kmshack.kr Content API"] },
+          "version": { "type": "string", "description": "Semantic version of the API contract.", "examples": ["1.0.0"] },
+          "description": { "type": "string", "description": "What this API exposes." },
+          "documentation": { "type": "string", "format": "uri", "description": "URL of the developer portal." },
+          "openapi": { "type": "string", "format": "uri", "description": "URL of the OpenAPI specification." },
+          "llms_txt": { "type": "string", "format": "uri", "description": "URL of the llms.txt agent guide." },
+          "generated_at": { "type": "string", "format": "date-time", "description": "Build time of this document." },
+          "auth": { "type": "string", "description": "Authentication scheme. Always \"none\".", "examples": ["none"] },
+          "cors": { "type": "string", "description": "Value of the Access-Control-Allow-Origin header.", "examples": ["*"] },
+          "rate_limit": { "type": "string", "description": "Caching and polling guidance. There is no enforced quota." },
+          "license": { "$ref": "#/components/schemas/License" },
+          "endpoints": {
+            "type": "array",
+            "description": "Every endpoint in this API.",
+            "items": { "$ref": "#/components/schemas/Endpoint" }
+          }
+        }
+      },
+      "Endpoint": {
+        "type": "object",
+        "description": "One callable endpoint.",
+        "required": ["path", "method", "operationId"],
+        "properties": {
+          "path": { "type": "string", "description": "Path relative to the server URL.", "examples": ["/api/posts.json"] },
+          "method": { "type": "string", "description": "HTTP method.", "enum": ["GET"], "examples": ["GET"] },
+          "operationId": { "type": "string", "description": "Unique operation id, matching the OpenAPI document.", "examples": ["listPosts"] },
+          "summary": { "type": "string", "description": "Short label for the endpoint." },
+          "description": { "type": "string", "description": "What the endpoint returns and when to call it." }
+        }
+      },
+      "License": {
+        "type": "object",
+        "description": "Licence covering the data returned by this API.",
+        "required": ["name", "url"],
+        "properties": {
+          "name": { "type": "string", "examples": ["CC BY 4.0"] },
+          "url": { "type": "string", "format": "uri" }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "description": "Identity of the site owner.",
+        "required": ["name", "job_title", "url"],
+        "properties": {
+          "name": { "type": "string", "description": "Preferred romanized name.", "examples": ["Minsoo Kim"] },
+          "alternate_names": { "type": "array", "description": "Other names the same person is known by.", "items": { "type": "string" }, "examples": [["김민수", "kmshack"]] },
+          "job_title": { "type": "string", "examples": ["Android Engineer"] },
+          "headline": { "type": "string", "description": "One-line positioning statement." },
+          "summary": { "type": "string", "description": "Paragraph-length biography." },
+          "status": { "type": "string", "description": "What the owner is doing right now.", "examples": ["Independent — indie apps & writing"] },
+          "location": { "$ref": "#/components/schemas/Location" },
+          "languages": { "type": "array", "description": "BCP 47 language subtags the owner works in.", "items": { "type": "string" }, "examples": [["ko", "en"]] },
+          "years_of_experience": { "type": "integer", "description": "Years of professional Android development.", "examples": [16] },
+          "email": { "type": "string", "format": "email", "description": "Public contact address." },
+          "url": { "type": "string", "format": "uri", "description": "Canonical home page." },
+          "image": { "type": "string", "format": "uri", "description": "Portrait image URL." },
+          "stats": { "type": "array", "description": "Headline figures shown on the home page.", "items": { "$ref": "#/components/schemas/Stat" } },
+          "skills": { "type": "array", "description": "Skills grouped by area.", "items": { "$ref": "#/components/schemas/SkillGroup" } },
+          "links": { "type": "array", "description": "Canonical links for this identity.", "items": { "$ref": "#/components/schemas/Link" } },
+          "generated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "Location": {
+        "type": "object",
+        "description": "Where the owner is based.",
+        "properties": {
+          "locality": { "type": "string", "examples": ["Seoul"] },
+          "country": { "type": "string", "description": "ISO 3166-1 alpha-2 country code.", "examples": ["KR"] }
+        }
+      },
+      "Stat": {
+        "type": "object",
+        "description": "A labelled headline figure.",
+        "properties": {
+          "label": { "type": "string", "examples": ["Downloads"] },
+          "value": { "type": "string", "examples": ["6.1M+"] }
+        }
+      },
+      "SkillGroup": {
+        "type": "object",
+        "description": "A named group of skills.",
+        "properties": {
+          "group": { "type": "string", "examples": ["UI & Motion"] },
+          "items": { "type": "array", "items": { "type": "string" }, "examples": [["Jetpack Compose", "MotionLayout"]] }
+        }
+      },
+      "Link": {
+        "type": "object",
+        "description": "A canonical link belonging to this identity.",
+        "required": ["url"],
+        "properties": {
+          "label": { "type": "string", "examples": ["GitHub"] },
+          "type": { "type": "string", "description": "Kind of link.", "enum": ["website", "blog", "feed", "profile"], "examples": ["profile"] },
+          "url": { "type": "string", "format": "uri", "examples": ["https://github.com/kmshack"] }
+        }
+      },
+      "ProjectList": {
+        "type": "object",
+        "description": "Every project, indie and professional.",
+        "required": ["count", "projects"],
+        "properties": {
+          "count": { "type": "integer", "description": "Number of projects returned.", "examples": [6] },
+          "generated_at": { "type": "string", "format": "date-time" },
+          "projects": { "type": "array", "items": { "$ref": "#/components/schemas/Project" } }
+        }
+      },
+      "Project": {
+        "type": "object",
+        "description": "One shipped product.",
+        "required": ["id", "name", "type", "summary"],
+        "properties": {
+          "id": { "type": "string", "description": "Stable identifier.", "examples": ["busanbus"] },
+          "name": { "type": "string", "examples": ["BusanBus"] },
+          "type": { "type": "string", "description": "Built solo, or shipped inside a company.", "enum": ["indie", "professional"], "examples": ["indie"] },
+          "status": { "type": "string", "description": "Whether the app is still maintained by the owner.", "enum": ["live", "shipped"], "examples": ["live"] },
+          "platform": { "type": "string", "examples": ["Android"] },
+          "role": { "type": ["string", "null"], "description": "The owner's role on the project, when it differs from engineering." },
+          "organization": { "type": ["string", "null"], "description": "Company the product belongs to, for professional work.", "examples": ["Kakao"] },
+          "category": { "type": ["string", "null"], "description": "Product category.", "examples": ["Messenger"] },
+          "summary": { "type": "string", "description": "What the product does." },
+          "downloads": { "type": ["string", "null"], "description": "Publicly reported download count, as displayed by the store.", "examples": ["1M+"] },
+          "tech": { "type": "array", "description": "Notable technologies used.", "items": { "type": "string" } },
+          "url": { "type": ["string", "null"], "format": "uri", "description": "Store or product URL, when public." }
+        }
+      },
+      "ExperienceList": {
+        "type": "object",
+        "description": "Career timeline, newest first.",
+        "required": ["count", "experience"],
+        "properties": {
+          "count": { "type": "integer", "examples": [3] },
+          "generated_at": { "type": "string", "format": "date-time" },
+          "experience": { "type": "array", "items": { "$ref": "#/components/schemas/Experience" } }
+        }
+      },
+      "Experience": {
+        "type": "object",
+        "description": "One position.",
+        "required": ["id", "organization", "role"],
+        "properties": {
+          "id": { "type": "string", "examples": ["kakao"] },
+          "organization": { "type": "string", "examples": ["Kakao"] },
+          "role": { "type": "string", "examples": ["Android Engineer"] },
+          "period": { "type": "string", "description": "Human-readable period as shown on the site.", "examples": ["2015 — NOW"] },
+          "start": { "type": "string", "description": "Start year.", "examples": ["2015"] },
+          "end": { "type": ["string", "null"], "description": "End year, or null when ongoing." },
+          "summary": { "type": "string", "description": "What the work involved." },
+          "products": { "type": "array", "description": "Products shipped in this role.", "items": { "type": "string" } }
+        }
+      },
+      "PostList": {
+        "type": "object",
+        "description": "The complete blog index, newest first.",
+        "required": ["count", "posts"],
+        "properties": {
+          "count": { "type": "integer", "description": "Number of posts returned.", "examples": [35] },
+          "language": { "type": "string", "description": "Language most posts are written in.", "examples": ["ko"] },
+          "feed": { "type": "string", "format": "uri", "description": "Atom feed carrying the same posts." },
+          "generated_at": { "type": "string", "format": "date-time" },
+          "posts": { "type": "array", "items": { "$ref": "#/components/schemas/Post" } }
+        }
+      },
+      "Post": {
+        "type": "object",
+        "description": "One blog post.",
+        "required": ["id", "title", "url", "date"],
+        "properties": {
+          "id": { "type": "string", "description": "Post slug — the final path segment of the canonical URL, unique within the blog.", "examples": ["motionlayout"] },
+          "title": { "type": "string", "description": "Post title, usually Korean." },
+          "url": { "type": "string", "format": "uri", "description": "Canonical URL of the article." },
+          "date": { "type": "string", "format": "date-time", "description": "Publication date." },
+          "modified": { "type": "string", "format": "date-time", "description": "Last modification date; equal to `date` when never revised." },
+          "tags": { "type": "array", "description": "Topic tags.", "items": { "type": "string" } },
+          "summary": { "type": "string", "description": "Plain-text summary, truncated to about 200 characters." },
+          "language": { "type": "string", "description": "BCP 47 subtag for the article language.", "examples": ["ko"] },
+          "legacy": { "type": "boolean", "description": "True when the post was written against older Android APIs and carries an outdated-content notice.", "examples": [true] }
+        }
+      },
+      "TagList": {
+        "type": "object",
+        "description": "Every tag used across the blog.",
+        "required": ["count", "tags"],
+        "properties": {
+          "count": { "type": "integer", "examples": [20] },
+          "generated_at": { "type": "string", "format": "date-time" },
+          "tags": { "type": "array", "items": { "$ref": "#/components/schemas/Tag" } }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "description": "One tag and the posts carrying it.",
+        "required": ["name", "count"],
+        "properties": {
+          "name": { "type": "string", "description": "Tag as written on the posts.", "examples": ["안드로이드"] },
+          "slug": { "type": "string", "description": "URL-safe form used in the on-site tag index." },
+          "url": { "type": "string", "format": "uri", "description": "Human-readable page listing the posts with this tag." },
+          "count": { "type": "integer", "description": "Number of posts carrying the tag.", "examples": [12] },
+          "posts": { "type": "array", "description": "Slugs (`Post.id`) of the posts carrying the tag.", "items": { "type": "string" } }
+        }
+      },
+      "OpenApiSpec": {
+        "type": "object",
+        "description": "An OpenAPI 3.1 document.",
+        "required": ["openapi", "info", "paths"],
+        "properties": {
+          "openapi": { "type": "string", "examples": ["3.1.0"] },
+          "info": { "type": "object", "description": "Specification metadata." },
+          "paths": { "type": "object", "description": "The described operations." }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "description": "Structured error body.",
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": ["code", "message", "status"],
+            "properties": {
+              "code": { "type": "string", "description": "Stable, machine-readable error code.", "enum": ["not_found", "not_acceptable", "method_not_allowed"], "examples": ["not_found"] },
+              "message": { "type": "string", "description": "Human-readable explanation.", "examples": ["No such resource: /api/unknown.json"] },
+              "status": { "type": "integer", "description": "HTTP status code.", "examples": [404] },
+              "hint": { "type": "string", "description": "How to recover from this error.", "examples": ["Fetch /api/index.json for the list of available endpoints."] },
+              "documentation_url": { "type": "string", "format": "uri", "description": "Where the endpoint is documented.", "examples": ["https://kmshack.kr/developers/"] }
+            }
+          }
+        }
+      }
+    }
+  }
+}

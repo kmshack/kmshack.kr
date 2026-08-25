@@ -35,3 +35,5 @@ exclude:
   - .gitignore
   - design-qa.md
   - CLAUDE.md
+  - tests/
+  - cloudflare/

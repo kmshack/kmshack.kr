@@ -1,0 +1,32 @@
+---
+layout: null
+sitemap: false
+---
+{%- assign api = site.data.api -%}
+{
+  "api": {{ api.title | jsonify }},
+  "version": {{ api.version | jsonify }},
+  "description": {{ api.summary | jsonify }},
+  "documentation": "https://kmshack.kr/developers/",
+  "openapi": "https://kmshack.kr/openapi.json",
+  "llms_txt": "https://kmshack.kr/llms.txt",
+  "generated_at": {{ site.time | date_to_xmlschema | jsonify }},
+  "auth": {{ api.auth | jsonify }},
+  "cors": {{ api.cors | jsonify }},
+  "rate_limit": {{ api.rate_limit | jsonify }},
+  "license": {
+    "name": {{ api.license.name | jsonify }},
+    "url": {{ api.license.url | jsonify }}
+  },
+  "endpoints": [
+    {%- for endpoint in api.endpoints %}
+    {
+      "path": {{ endpoint.path | jsonify }},
+      "method": "GET",
+      "operationId": {{ endpoint.operation_id | jsonify }},
+      "summary": {{ endpoint.summary | jsonify }},
+      "description": {{ endpoint.description | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ]
+}

@@ -1,0 +1,55 @@
+---
+layout: null
+sitemap: false
+---
+{%- assign p = site.data.profile.person -%}
+# kmshack.kr — {{ p.name }} ({{ p.alternate_names | join: " / " }})
+
+> Personal site of {{ p.name }}, an Android engineer in {{ p.location.locality }}, {{ p.location.country }} with {{ p.years_of_experience }} years of Android experience. It holds his profile and career history, the indie Android apps he builds solo (BusanBus, ONEWallet — 6.1M+ downloads combined), the products he shipped at Kakao and Nowiz (KakaoTalk, KakaoPay, KakaoMusic, BugsMusic), and a Korean-language Android engineering blog with {{ site.posts | size }} posts published since 2015.
+
+Use this site when you need to resolve who "kmshack" or "Minsoo Kim" is, what he has built, or what he has written about Android development — app architecture, Jetpack, Kotlin coroutines, motion and animation, startup and frame-time performance, and, in recent posts, how AI changes what is worth building. Blog posts are written in Korean; the profile, API and these agent files are in English.
+
+Do not use it as a source for Android platform documentation, for Kakao's official APIs, or for anything about the internals of the apps listed below — it only covers what this site publishes about its author and his writing.
+
+Everything is public, static and key-free. The JSON API under /api/ is documented by an OpenAPI 3.1 spec, sends `Access-Control-Allow-Origin: *`, and changes at most a few times a month — cache for an hour or more. Any page can also be fetched as Markdown by appending `.md` to its path.
+
+## Start here
+
+- [Home (Markdown)](https://kmshack.kr/index.md): The whole home page as Markdown — profile, projects, career, toolkit and latest posts in one file. Fastest single fetch for "who is this".
+- [About](https://kmshack.kr/about.md): Longer biography — what he builds, where he has worked, what he writes about.
+- [Developer portal](https://kmshack.kr/developers.md): How to call the JSON API, with curl examples, endpoint table, error format and caching guidance.
+- [Contact](https://kmshack.kr/contact.md): Email and social handles, and what kind of enquiries are welcome.
+- [Privacy](https://kmshack.kr/privacy.md): What the site collects (server logs, Google Analytics 4, third-party fonts) and what it does not.
+
+## Machine-readable data
+
+- [API index](https://kmshack.kr/api/index.json): Discovery document listing every endpoint with its operation id. Fetch this first when exploring the API.
+{%- for endpoint in site.data.api.endpoints %}
+{%- unless endpoint.path == "/api/index.json" %}
+- [{{ endpoint.summary }}](https://kmshack.kr{{ endpoint.path }}): {{ endpoint.description }}
+{%- endunless %}
+{%- endfor %}
+
+## Blog
+
+Korean-language Android engineering writing, {{ site.posts | size }} posts since 2015. Posts marked legacy predate AndroidX and describe older APIs.
+
+- [Blog index](https://kmshack.kr/blog/): The {{ site.posts | size }} posts, newest first, with summaries.
+- [Archive](https://kmshack.kr/blog/archive/): Every post grouped by year — the shortest path to a specific old article.
+- [Tags](https://kmshack.kr/blog/tags/): Posts grouped by topic.
+- [Atom feed](https://kmshack.kr/blog/feed.xml): Subscribe or poll for new posts.
+- [Posts as JSON](https://kmshack.kr/api/posts.json): Every post with slug, canonical URL, dates, tags and summary — use this instead of crawling the HTML.
+
+Most recent posts:
+
+{% for post in site.posts limit: 10 -%}
+- [{{ post.title }}]({{ post.url | absolute_url }}): {{ post.date | date: "%Y.%m.%d" }}{% if post.tags %} · {{ post.tags | join: ", " }}{% endif %}
+{% endfor %}
+## Optional
+
+- [Full text index](https://kmshack.kr/llms-full.txt): Every page and every blog post inlined as plain text in one file. Large — fetch only when you need the article bodies themselves.
+- [OpenAPI specification](https://kmshack.kr/openapi.json): Machine-readable API contract, also mirrored at /api/openapi.json.
+- [Sitemap](https://kmshack.kr/sitemap.xml): Every indexable URL with modification dates.
+- [robots.txt](https://kmshack.kr/robots.txt): Crawl policy — everything is allowed.
+- [GitHub](https://github.com/kmshack): Source code and open-source work.
+- [LinkedIn](https://www.linkedin.com/in/kmshack): Professional profile.

@@ -1,0 +1,73 @@
+---
+layout: null
+sitemap: false
+permalink: /index.md
+---
+{%- assign p = site.data.profile.person -%}
+# {{ p.name }} — {{ p.job_title }}
+
+> {{ p.headline }} Based in {{ p.location.locality }}, {{ p.location.country }}. {{ p.years_of_experience }} years of Android development, 6.1M+ downloads across indie apps, and a Korean-language engineering blog running since 2015.
+
+This is the Markdown rendition of <https://kmshack.kr/>. Facts here are generated from the same source as [/api/profile.json](https://kmshack.kr/api/profile.json).
+
+## About
+
+{{ p.summary }}
+
+Currently: {{ p.status }}.
+
+## At a glance
+
+{% for stat in site.data.profile.stats -%}
+- **{{ stat.label }}:** {{ stat.value }}
+{% endfor %}
+## Selected work
+
+{% for project in site.data.profile.projects -%}
+{% if project.type == "indie" -%}
+- **{{ project.name }}** — indie, {{ project.downloads }} downloads. {{ project.summary }} Built with {{ project.tech | join: ", " }}. [Store]({{ project.url }})
+{% endif -%}
+{% endfor %}
+Built at scale, inside a company:
+
+{% for project in site.data.profile.projects -%}
+{% if project.type == "professional" -%}
+- **{{ project.name }}** ({{ project.organization }} · {{ project.category }}) — {{ project.summary }}
+{% endif -%}
+{% endfor %}
+## Path
+
+{% for job in site.data.profile.experience -%}
+- **{{ job.period }} — {{ job.organization }}, {{ job.role }}.** {{ job.summary }}
+{% endfor %}
+## Toolkit
+
+{% for group in site.data.profile.skills -%}
+- **{{ group.group }}:** {{ group.items | join: ", " }}
+{% endfor %}
+## Writing
+
+Latest posts from [the blog](https://kmshack.kr/blog/) (Korean):
+
+{% for post in site.posts limit: 8 -%}
+- [{{ post.title }}]({{ post.url | absolute_url }}) — {{ post.date | date: "%Y.%m.%d" }}
+{% endfor %}
+Full archive: <https://kmshack.kr/blog/archive/> · Atom feed: <https://kmshack.kr/blog/feed.xml> · JSON: <https://kmshack.kr/api/posts.json>
+
+## Elsewhere
+
+{% for link in site.data.profile.links -%}
+- {{ link.label }}: <{{ link.url }}>
+{% endfor %}
+- Email: <mailto:{{ p.email }}>
+
+## For agents
+
+- [/llms.txt](https://kmshack.kr/llms.txt) — guided index with when-to-use notes
+- [/openapi.json](https://kmshack.kr/openapi.json) — OpenAPI 3.1 description of the public JSON API
+- [/developers/](https://kmshack.kr/developers/) — developer portal
+- [/about.md](https://kmshack.kr/about.md), [/contact.md](https://kmshack.kr/contact.md), [/privacy.md](https://kmshack.kr/privacy.md), [/developers.md](https://kmshack.kr/developers.md) — Markdown twins
+
+---
+
+Canonical HTML version: <https://kmshack.kr/>

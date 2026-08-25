@@ -1,0 +1,9 @@
+---
+layout: null
+sitemap: false
+---
+{
+  "count": {{ site.data.profile.projects | size }},
+  "generated_at": {{ site.time | date_to_xmlschema | jsonify }},
+  "projects": {{ site.data.profile.projects | jsonify }}
+}

@@ -1,0 +1,127 @@
+# Single source of truth for machine-readable facts about this site.
+# Consumed by /api/*.json, /openapi.json, /llms.txt, /index.md and the
+# homepage JSON-LD (_includes/home-structured-data.html).
+# Keep in sync with the copy in index.html when facts change.
+
+person:
+  name: "Minsoo Kim"
+  alternate_names: ["김민수", "kmshack"]
+  job_title: "Android Engineer"
+  headline: "Android engineer building thoughtful apps and digital products."
+  summary: "Sixteen years of Android development. Works where UI/UX design meets implementation — interfaces that survive a designer's zoom-in, and frame budgets that survive a mid-range phone. Builds indie apps end to end and writes about the platform in Korean."
+  status: "Independent — indie apps & writing"
+  location:
+    locality: "Seoul"
+    country: "KR"
+  languages: ["ko", "en"]
+  years_of_experience: 16
+  email: "kmshack@naver.com"
+  url: "https://kmshack.kr"
+  image: "https://kmshack.kr/assets/images/og-image.jpg"
+
+stats:
+  - { label: "Years in", value: "16" }
+  - { label: "Craft", value: "UI / UX" }
+  - { label: "Base", value: "Seoul" }
+  - { label: "Downloads", value: "6.1M+" }
+
+links:
+  - { label: "Website", type: "website", url: "https://kmshack.kr/" }
+  - { label: "Blog", type: "blog", url: "https://kmshack.kr/blog/" }
+  - { label: "RSS", type: "feed", url: "https://kmshack.kr/blog/feed.xml" }
+  - { label: "GitHub", type: "profile", url: "https://github.com/kmshack" }
+  - { label: "LinkedIn", type: "profile", url: "https://www.linkedin.com/in/kmshack" }
+  - { label: "X", type: "profile", url: "https://x.com/kmshack_kr" }
+  - { label: "Threads", type: "profile", url: "https://threads.net/@kmshack" }
+
+skills:
+  - group: "Platform"
+    items: ["Android SDK", "Wear OS", "App Widgets", "Play Services"]
+  - group: "Language"
+    items: ["Kotlin", "Coroutines & Flow", "Java", "Gradle / KTS"]
+  - group: "UI & Motion"
+    items: ["Jetpack Compose", "MotionLayout", "ConstraintLayout", "Material 3"]
+  - group: "Architecture"
+    items: ["MVVM", "Hilt / Dagger", "Room · WorkManager", "Modularization"]
+  - group: "Craft"
+    items: ["Startup & frame time", "Memory profiling", "Accessibility", "Design systems"]
+
+projects:
+  - id: "busanbus"
+    name: "BusanBus"
+    type: "indie"
+    status: "live"
+    platform: "Android"
+    role: "Solo — design, code, store listing, support"
+    summary: "Busan commuters ask one question: how long until the bus? BusanBus answers it in a glance — live arrivals, saved stops, and a home-screen widget you never have to open."
+    downloads: "1M+"
+    tech: ["Kotlin", "Widgets", "Public transit API"]
+    url: "https://play.google.com/store/search?q=busanbus&c=apps"
+  - id: "onewallet"
+    name: "ONEWallet"
+    type: "indie"
+    status: "live"
+    platform: "Android"
+    role: "Solo — design, code, store listing, support"
+    summary: "Every membership card, coupon and stamp in one wallet. Scan once at the counter instead of digging through a bag — rewards you actually remember to use."
+    downloads: "3M+"
+    tech: ["Kotlin", "Barcode / ML Kit", "Offline-first"]
+    url: "https://play.google.com/store/search?q=onewallet&c=apps"
+  - id: "kakaotalk"
+    name: "KakaoTalk"
+    type: "professional"
+    status: "shipped"
+    platform: "Android"
+    organization: "Kakao"
+    category: "Messenger"
+    summary: "Chat for a whole country. Every pixel gets looked at twice, and every millisecond gets argued about."
+  - id: "kakaopay"
+    name: "KakaoPay"
+    type: "professional"
+    status: "shipped"
+    platform: "Android"
+    organization: "Kakao"
+    category: "Payments"
+    summary: "Money moves through this screen. Nothing may drop a frame, and nothing may surprise the user."
+  - id: "kakaomusic"
+    name: "KakaoMusic"
+    type: "professional"
+    status: "shipped"
+    platform: "Android"
+    organization: "Kakao"
+    category: "Music"
+    summary: "A player, a feed and a friend list in one app — playback that keeps running while the UI changes shape."
+  - id: "bugsmusic"
+    name: "BugsMusic"
+    type: "professional"
+    status: "shipped"
+    platform: "Android"
+    organization: "Nowiz"
+    category: "Music"
+    summary: "Streaming back when streaming was hard — background audio, flaky networks, tiny heaps."
+
+experience:
+  - id: "independent"
+    organization: "Independent"
+    role: "Indie developer"
+    period: "2024 — NOW"
+    start: "2024"
+    end: null
+    summary: "Shipping my own apps end to end, writing about the platform, and taking on the occasional collaboration. The whole loop — idea, design, code, store, support."
+    products: []
+  - id: "kakao"
+    organization: "Kakao"
+    role: "Android Engineer"
+    period: "2015 — NOW"
+    start: "2015"
+    end: null
+    summary: "A decade on apps with national reach — KakaoTalk, KakaoPay and KakaoMusic. UI architecture, motion systems, and the performance work that keeps a 10-year-old codebase feeling new."
+    products: ["KakaoTalk", "KakaoPay"]
+  - id: "nowiz"
+    organization: "Nowiz"
+    role: "Android Engineer"
+    period: "2010 — 2015"
+    start: "2010"
+    end: "2015"
+    summary: "BugsMusic, in the era when Android had no support libraries and every animation was hand-rolled. A very good place to learn what the framework actually does."
+    products: ["BugsMusic", "KakaoMusic"]

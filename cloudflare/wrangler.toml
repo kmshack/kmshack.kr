@@ -1,0 +1,9 @@
+# Deploy: npx wrangler deploy   (run from this directory)
+name = "kmshack-kr-negotiation"
+main = "markdown-negotiation-worker.js"
+compatibility_date = "2026-08-25"
+workers_dev = false
+
+[[routes]]
+pattern = "kmshack.kr/*"
+zone_name = "kmshack.kr"

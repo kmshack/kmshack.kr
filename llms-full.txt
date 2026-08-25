@@ -1,0 +1,63 @@
+---
+layout: null
+sitemap: false
+---
+{%- assign p = site.data.profile.person -%}
+# kmshack.kr — {{ p.name }} ({{ p.alternate_names | join: " / " }}) — full text
+
+> Every page and every blog post of https://kmshack.kr in one file. Personal site of {{ p.name }}, an Android engineer in {{ p.location.locality }}, {{ p.location.country }}: profile, projects, career history, and {{ site.posts | size }} Korean-language Android engineering posts published since 2015.
+
+Generated {{ site.time | date: "%Y-%m-%d" }}. For a short, curated index instead, fetch https://kmshack.kr/llms.txt.
+
+Article bodies below are the plain-text rendering of each post: code blocks, images and link targets are dropped. The formatted originals are at the canonical URL printed with each post. Structured metadata for the same posts is at https://kmshack.kr/api/posts.json.
+
+---
+
+# About Minsoo Kim
+
+Source: https://kmshack.kr/about/
+
+{% include content/about.md %}
+
+---
+
+# Developers — kmshack.kr API
+
+Source: https://kmshack.kr/developers/
+
+{% include content/developers.md %}
+
+---
+
+# Contact Minsoo Kim
+
+Source: https://kmshack.kr/contact/
+
+{% include content/contact.md %}
+
+---
+
+# Privacy
+
+Source: https://kmshack.kr/privacy/
+
+{% include content/privacy.md %}
+
+---
+
+# Blog — full text ({{ site.posts | size }} posts, newest first)
+
+{% for post in site.posts %}
+---
+
+## {{ post.title }}
+
+- URL: {{ post.url | absolute_url }}
+- Published: {{ post.date | date: "%Y-%m-%d" }}{% if post.last_modified_at %} · Updated: {{ post.last_modified_at | date: "%Y-%m-%d" }}{% endif %}
+{%- if post.tags %}
+- Tags: {{ post.tags | join: ", " }}
+{%- endif %}
+- Language: ko{% if post.legacy %} · Legacy: written against pre-AndroidX APIs{% endif %}
+
+{{ post.content | strip_html | replace: "&lt;", "<" | replace: "&gt;", ">" | replace: "&quot;", '"' | replace: "&#39;", "'" | replace: "&nbsp;", " " | replace: "&amp;", "&" | strip }}
+{% endfor %}

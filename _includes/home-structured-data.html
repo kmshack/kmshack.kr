@@ -1,0 +1,48 @@
+{%- assign p = site.data.profile.person -%}
+{%- assign same_as = site.data.profile.links | where: "type", "profile" | map: "url" -%}
+{%- assign knows_about = site.data.profile.skills | map: "items" | join: "," | split: "," -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://kmshack.kr/#person",
+      "name": {{ p.name | jsonify }},
+      "alternateName": {{ p.alternate_names | jsonify }},
+      "jobTitle": {{ p.job_title | jsonify }},
+      "description": {{ p.summary | jsonify }},
+      "url": "https://kmshack.kr/",
+      "image": {{ p.image | jsonify }},
+      "email": {{ p.email | prepend: "mailto:" | jsonify }},
+      "knowsLanguage": {{ p.languages | jsonify }},
+      "knowsAbout": {{ knows_about | jsonify }},
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": {{ p.location.locality | jsonify }},
+        "addressCountry": {{ p.location.country | jsonify }}
+      },
+      "sameAs": {{ same_as | jsonify }}
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://kmshack.kr/#website",
+      "url": "https://kmshack.kr/",
+      "name": {{ site.title | jsonify }},
+      "description": {{ p.headline | jsonify }},
+      "inLanguage": ["en", "ko-KR"],
+      "publisher": { "@id": "https://kmshack.kr/#person" }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://kmshack.kr/#profilepage",
+      "url": "https://kmshack.kr/",
+      "name": {{ site.title | jsonify }},
+      "isPartOf": { "@id": "https://kmshack.kr/#website" },
+      "about": { "@id": "https://kmshack.kr/#person" },
+      "primaryImageOfPage": {{ p.image | jsonify }},
+      "inLanguage": "en"
+    }
+  ]
+}
+</script>

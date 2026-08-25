@@ -198,6 +198,7 @@ button { font: inherit; }
 .contact-actions { margin-top: clamp(28px, 3vw, 40px); }
 .contact-actions .button { min-height: 50px; }
 .footer-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: clamp(60px, 8vw, 110px); padding-top: 26px; border-top: 1px solid var(--line-soft); color: var(--fg-subtle); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.footer-meta nav { display: flex; flex-wrap: wrap; gap: 18px; }
 .footer-meta a { color: var(--fg-subtle); }
 .footer-meta a:hover { color: var(--accent); }
 
