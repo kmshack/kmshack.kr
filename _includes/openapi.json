@@ -79,7 +79,7 @@
         "tags": ["identity"],
         "operationId": "listProjects",
         "summary": "List projects",
-        "description": "Returns every product worked on, newest and most prominent first: indie Android apps built solo (with public download counts and store URLs) and professional apps shipped inside Kakao and Nowiz. Filter client-side on the `type` field to separate indie work from professional work.",
+        "description": "Returns every product worked on, newest and most prominent first: indie Android apps built solo (with public download counts and store URLs) and professional apps shipped inside Kakao and NEOWIZ. Filter client-side on the `type` field to separate indie work from professional work.",
         "responses": {
           "200": {
             "description": "The full project list.",

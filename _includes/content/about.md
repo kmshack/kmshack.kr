@@ -4,7 +4,7 @@
 
 Sixteen years of building Android apps, split between products used at national scale and indie apps built alone. The work sits where UI/UX design meets implementation: interfaces that survive a designer's zoom-in, and frame budgets that survive a mid-range phone. Startup time, memory, motion — the unglamorous parts users feel but never name.
 
-At [Kakao](https://www.kakaocorp.com/) he has worked on KakaoTalk, KakaoPay and KakaoMusic — UI architecture, motion systems, and the performance work that keeps a decade-old codebase feeling new. Before that, at Nowiz, he built BugsMusic in the era when Android had no support libraries and every animation was hand-rolled.
+At [Kakao](https://www.kakaocorp.com/) he has worked on KakaoTalk, KakaoPay and KakaoMusic — UI architecture, motion systems, and the performance work that keeps a decade-old codebase feeling new. Before that, at NEOWIZ, he built BugsMusic in the era when Android had no support libraries and every animation was hand-rolled.
 
 Alongside that he ships his own apps end to end — design, code, store listing and support email. [BusanBus](https://play.google.com/store/search?q=busanbus&c=apps) answers the one question Busan commuters have (how long until the bus?) and [ONEWallet](https://play.google.com/store/search?q=onewallet&c=apps) collapses a bag full of membership cards into one screen. Together they have passed 6.1 million downloads.
 

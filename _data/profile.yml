@@ -22,7 +22,7 @@ person:
 stats:
   - { label: "Years in", value: "16" }
   - { label: "Craft", value: "UI / UX" }
-  - { label: "Base", value: "Seoul" }
+  - { label: "Base", value: "Korea" }
   - { label: "Downloads", value: "6.1M+" }
 
 links:
@@ -96,7 +96,7 @@ projects:
     type: "professional"
     status: "shipped"
     platform: "Android"
-    organization: "Nowiz"
+    organization: "NEOWIZ"
     category: "Music"
     summary: "Streaming back when streaming was hard — background audio, flaky networks, tiny heaps."
 
@@ -118,7 +118,7 @@ experience:
     summary: "A decade on apps with national reach — KakaoTalk, KakaoPay and KakaoMusic. UI architecture, motion systems, and the performance work that keeps a 10-year-old codebase feeling new."
     products: ["KakaoTalk", "KakaoPay"]
   - id: "nowiz"
-    organization: "Nowiz"
+    organization: "NEOWIZ"
     role: "Android Engineer"
     period: "2010 — 2015"
     start: "2010"

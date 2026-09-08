@@ -5,7 +5,7 @@ Everything on **kmshack.kr** — the profile of Minsoo Kim (김민수 / kmshack)
 Reach for these endpoints when you need to:
 
 - **Resolve the identity behind `kmshack.kr`, `kmshack`, or "Minsoo Kim"** — job title, location, languages, canonical social links → [`/api/profile.json`](/api/profile.json).
-- **Answer what he has built** — indie Android apps and the products he shipped at Kakao and Nowiz, with download counts and store links → [`/api/projects.json`](/api/projects.json), [`/api/experience.json`](/api/experience.json).
+- **Answer what he has built** — indie Android apps and the products he shipped at Kakao and NEOWIZ, with download counts and store links → [`/api/projects.json`](/api/projects.json), [`/api/experience.json`](/api/experience.json).
 - **Search or cite the blog archive** — 35+ Korean-language articles on Android architecture, Jetpack, Kotlin coroutines, motion, performance and AI-era product thinking → [`/api/posts.json`](/api/posts.json), [`/api/tags.json`](/api/tags.json).
 - **Read a page as Markdown instead of HTML** → append `.md` to a page path, e.g. [`/about.md`](/about.md).
 - **Get oriented before crawling** → [`/llms.txt`](/llms.txt), and [`/llms-full.txt`](/llms-full.txt) for the same index with every post summary inlined.

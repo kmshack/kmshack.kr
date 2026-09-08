@@ -5,7 +5,7 @@ sitemap: false
 {%- assign p = site.data.profile.person -%}
 # kmshack.kr — {{ p.name }} ({{ p.alternate_names | join: " / " }})
 
-> Personal site of {{ p.name }}, an Android engineer in {{ p.location.locality }}, {{ p.location.country }} with {{ p.years_of_experience }} years of Android experience. It holds his profile and career history, the indie Android apps he builds solo (BusanBus, ONEWallet — 6.1M+ downloads combined), the products he shipped at Kakao and Nowiz (KakaoTalk, KakaoPay, KakaoMusic, BugsMusic), and a Korean-language Android engineering blog with {{ site.posts | size }} posts published since 2015.
+> Personal site of {{ p.name }}, an Android engineer in {{ p.location.locality }}, {{ p.location.country }} with {{ p.years_of_experience }} years of Android experience. It holds his profile and career history, the indie Android apps he builds solo (BusanBus, ONEWallet — 6.1M+ downloads combined), the products he shipped at Kakao and NEOWIZ (KakaoTalk, KakaoPay, KakaoMusic, BugsMusic), and a Korean-language Android engineering blog with {{ site.posts | size }} posts published since 2015.
 
 Use this site when you need to resolve who "kmshack" or "Minsoo Kim" is, what he has built, or what he has written about Android development — app architecture, Jetpack, Kotlin coroutines, motion and animation, startup and frame-time performance, and, in recent posts, how AI changes what is worth building. Blog posts are written in Korean; the profile, API and these agent files are in English.
 
