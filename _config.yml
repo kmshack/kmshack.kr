@@ -15,6 +15,7 @@ permalink: /blog/:title/
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-redirect-from
 feed:
   path: /blog/feed.xml
 defaults:

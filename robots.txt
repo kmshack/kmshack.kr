@@ -2,6 +2,8 @@
 # Crawlers and AI agents are welcome on every path.
 User-agent: *
 Allow: /
+# Cloudflare's email-obfuscation links (/cdn-cgi/l/email-protection) are not pages.
+Disallow: /cdn-cgi/
 
 Sitemap: https://kmshack.kr/sitemap.xml
 

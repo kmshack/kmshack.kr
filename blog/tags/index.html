@@ -4,6 +4,8 @@ title: Tags
 eyebrow: TOPICS
 description: Android, Kotlin, UI/UX, AI와 제품 개발 글을 주제별로 찾아보세요.
 permalink: /blog/tags/
+redirect_from:
+  - /tag/안드로이드/
 ---
 <nav class="tag-index" aria-label="태그 목록">
     {% for tag in site.tags %}<a href="#tag-{{ tag[0] | slugify }}"><span>{{ tag[0] }}</span><small>{{ tag[1] | size }}</small></a>{% endfor %}
