@@ -248,7 +248,7 @@ def check_api(fetcher: Fetcher) -> None:
 
     _, _, profile_body = fetcher.get("/api/profile.json")
     profile = json.loads(profile_body)
-    for field in ("name", "job_title", "location", "languages", "links", "skills", "email", "url"):
+    for field in ("name", "job_title", "languages", "links", "skills", "url"):
         check(f"api: profile has {field}", bool(profile.get(field)))
 
     _, _, posts_body = fetcher.get("/api/posts.json")
@@ -355,7 +355,7 @@ def check_homepage(fetcher: Fetcher) -> None:
     check("json-ld: declares a WebSite", "WebSite" in types)
     check("json-ld: declares a ProfilePage", "ProfilePage" in types)
     if person:
-        for field in ("name", "url", "description", "jobTitle", "image", "sameAs", "email"):
+        for field in ("name", "url", "description", "jobTitle", "image", "sameAs"):
             check(f"json-ld: Person has {field}", bool(person.get(field)))
         check("json-ld: Person.sameAs lists profiles", len(person.get("sameAs", [])) >= 3)
 
@@ -377,20 +377,16 @@ def check_trust_pages(fetcher: Fetcher) -> None:
     privacy_text = text_of(privacy).lower()
     for term in ("analytics", "cookie", "localstorage", "github pages", "cloudflare"):
         check(f"trust: privacy notice covers {term}", term in privacy_text)
-    address = "kmshack@naver.com"
-    _, _, contact = fetcher.get("/contact/")
+    private_contact = re.compile(
+        r"mailto:|[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}|"
+        r'"(?:email|telephone|address|location)"\s*:|PostalAddress|Seoul',
+        re.IGNORECASE,
+    )
+    for path in ["/", "/contact/", "/blog/", *MARKDOWN_TWINS, "/llms.txt", "/llms-full.txt", "/api/profile.json", "/openapi.json"]:
+        _, _, body = fetcher.get(path)
+        check(f"privacy: {path} omits personal contact and address details", not private_contact.search(body))
     _, _, contact_md = fetcher.get("/contact.md")
-    _, _, profile_json = fetcher.get("/api/profile.json")
-    check(
-        "trust: a contact address is machine-readable",
-        address in contact_md and address in profile_json,
-    )
-    warn(
-        "trust: contact page publishes the address in its HTML",
-        address in contact,
-        "Cloudflare Scrape Shield rewrites mailto links into /cdn-cgi/l/email-protection; "
-        "the address stays readable in /contact.md, /api/profile.json and the home page JSON-LD",
-    )
+    check("trust: public contact route remains available", "https://www.linkedin.com/in/kmshack" in contact_md)
 
 
 def check_markdown(fetcher: Fetcher) -> None:

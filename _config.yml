@@ -37,4 +37,5 @@ exclude:
   - design-qa.md
   - CLAUDE.md
   - tests/
+  - docs/
   - cloudflare/

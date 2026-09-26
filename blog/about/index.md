@@ -11,6 +11,6 @@ permalink: /blog/about/
 
 ## Contact
 
-- [kmshack@naver.com](mailto:kmshack@naver.com)
+- [공개 연락 채널](/contact/)
 - [LinkedIn](https://www.linkedin.com/in/kmshack)
 - [GitHub](https://github.com/kmshack)

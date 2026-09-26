@@ -26,7 +26,12 @@ layout: blog
                 <p>예제의 Support Library, Gradle 설정과 API 이름은 현재 AndroidX 및 최신 플랫폼과 다를 수 있습니다. 개념과 작성 당시의 맥락을 중심으로 읽어 주세요.</p>
             </aside>
             {% endif %}
-            <div class="entry" itemprop="articleBody">{{ content }}</div>
+            <div class="entry" itemprop="articleBody">{{ content }}
+            {% if page.faqs %}
+            <section aria-labelledby="post-faq"><h2 id="post-faq">자주 묻는 질문</h2>
+            {% for faq in page.faqs %}<h3>{{ faq.question | escape }}</h3><p>{{ faq.answer | escape }}</p>{% endfor %}
+            </section>
+            {% endif %}</div>
             <div class="post-actions"><button class="text-button" type="button" data-copy-link>링크 복사</button><a class="text-button" href="https://x.com/intent/post?text={{ page.title | uri_escape }}%20{{ site.url }}{{ page.url }}" target="_blank" rel="noopener">X 공유</a></div>
             <nav class="post-pagination" aria-label="게시물 탐색">
                 {% if page.previous.url %}<a rel="prev" href="{{ page.previous.url }}"><span>이전 글</span><strong>{{ page.previous.title | escape }}</strong><time>{{ page.previous.date | date: '%Y.%m.%d' }}</time></a>{% endif %}

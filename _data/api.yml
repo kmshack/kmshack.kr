@@ -21,7 +21,7 @@ endpoints:
   - path: "/api/profile.json"
     operation_id: "getProfile"
     summary: "Profile"
-    description: "Identity of the site owner: name, job title, location, languages, headline stats, skill groups and canonical social links."
+    description: "Identity of the site owner: name, job title, languages, headline stats, skill groups and canonical social links."
     schema: "Profile"
   - path: "/api/projects.json"
     operation_id: "listProjects"

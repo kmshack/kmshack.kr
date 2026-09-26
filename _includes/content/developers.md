@@ -4,7 +4,7 @@ Everything on **kmshack.kr** — the profile of Minsoo Kim (김민수 / kmshack)
 
 Reach for these endpoints when you need to:
 
-- **Resolve the identity behind `kmshack.kr`, `kmshack`, or "Minsoo Kim"** — job title, location, languages, canonical social links → [`/api/profile.json`](/api/profile.json).
+- **Resolve the identity behind `kmshack.kr`, `kmshack`, or "Minsoo Kim"** — job title, languages, canonical social links → [`/api/profile.json`](/api/profile.json).
 - **Answer what he has built** — indie Android apps and the products he shipped at Kakao and NEOWIZ, with download counts and store links → [`/api/projects.json`](/api/projects.json), [`/api/experience.json`](/api/experience.json).
 - **Search or cite the blog archive** — 35+ Korean-language articles on Android architecture, Jetpack, Kotlin coroutines, motion, performance and AI-era product thinking → [`/api/posts.json`](/api/posts.json), [`/api/tags.json`](/api/tags.json).
 - **Read a page as Markdown instead of HTML** → append `.md` to a page path, e.g. [`/about.md`](/about.md).
@@ -19,7 +19,7 @@ This is not the right source for Android documentation itself, for Kakao's offic
 curl -s https://kmshack.kr/api/index.json
 
 # Who owns this domain
-curl -s https://kmshack.kr/api/profile.json | jq '{name, job_title, location, links}'
+curl -s https://kmshack.kr/api/profile.json | jq '{name, job_title, links}'
 
 # The five most recent posts
 curl -s https://kmshack.kr/api/posts.json | jq '.posts[:5] | .[] | {title, url, date}'
@@ -84,4 +84,4 @@ The data returned by the API is published under [CC BY 4.0](https://creativecomm
 
 ## Contact
 
-Something wrong, missing or badly typed? [kmshack@naver.com](mailto:kmshack@naver.com) — see the [contact page](/contact/).
+Something wrong, missing or badly typed? Use the public profiles linked on the [contact page](/contact/).

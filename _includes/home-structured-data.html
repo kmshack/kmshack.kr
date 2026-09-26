@@ -14,14 +14,8 @@
       "description": {{ p.summary | jsonify }},
       "url": "https://kmshack.kr/",
       "image": {{ p.image | jsonify }},
-      "email": {{ p.email | prepend: "mailto:" | jsonify }},
       "knowsLanguage": {{ p.languages | jsonify }},
       "knowsAbout": {{ knows_about | jsonify }},
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": {{ p.location.locality | jsonify }},
-        "addressCountry": {{ p.location.country | jsonify }}
-      },
       "sameAs": {{ same_as | jsonify }}
     },
     {

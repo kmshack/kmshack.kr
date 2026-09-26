@@ -10,12 +10,8 @@ person:
   headline: "Android engineer building thoughtful apps and digital products."
   summary: "Sixteen years of Android development. Works where UI/UX design meets implementation — interfaces that survive a designer's zoom-in, and frame budgets that survive a mid-range phone. Builds indie apps end to end and writes about the platform in Korean."
   status: "Independent — indie apps & writing"
-  location:
-    locality: "Seoul"
-    country: "KR"
   languages: ["ko", "en"]
   years_of_experience: 16
-  email: "kmshack@naver.com"
   url: "https://kmshack.kr"
   image: "https://kmshack.kr/assets/images/og-image.jpg"
 

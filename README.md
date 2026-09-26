@@ -1,6 +1,6 @@
 # kmshack.kr
 
-Personal site of **Minsoo Kim** (김민수 / kmshack) — Android engineer in Seoul.
+Personal site of **Minsoo Kim** (김민수 / kmshack) — Android engineer.
 Portfolio at [kmshack.kr](https://kmshack.kr/), Korean-language Android
 engineering blog at [/blog/](https://kmshack.kr/blog/).
 

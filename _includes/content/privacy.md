@@ -46,4 +46,4 @@ Material changes will be reflected in the "last updated" date above. There is no
 
 ## Contact
 
-Questions about this notice: [kmshack@naver.com](mailto:kmshack@naver.com), or see the [contact page](/contact/).
+Questions about this notice can be sent through the public profiles linked on the [contact page](/contact/).

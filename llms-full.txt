@@ -5,7 +5,7 @@ sitemap: false
 {%- assign p = site.data.profile.person -%}
 # kmshack.kr — {{ p.name }} ({{ p.alternate_names | join: " / " }}) — full text
 
-> Every page and every blog post of https://kmshack.kr in one file. Personal site of {{ p.name }}, an Android engineer in {{ p.location.locality }}, {{ p.location.country }}: profile, projects, career history, and {{ site.posts | size }} Korean-language Android engineering posts published since 2015.
+> Every page and every blog post of https://kmshack.kr in one file. Personal site of {{ p.name }}, an Android engineer: profile, projects, career history, and {{ site.posts | size }} Korean-language Android engineering posts published since 2015.
 
 Generated {{ site.time | date: "%Y-%m-%d" }}. For a short, curated index instead, fetch https://kmshack.kr/llms.txt.
 

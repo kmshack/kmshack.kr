@@ -1,4 +1,4 @@
-**Minsoo Kim** (김민수, also known online as **kmshack**) is an Android engineer based in Seoul, South Korea, and the owner of this site, **kmshack.kr**.
+**Minsoo Kim** (김민수, also known online as **kmshack**) is an Android engineer and the owner of this site, **kmshack.kr**.
 
 ## What he does
 
@@ -22,4 +22,3 @@ The same facts are available as structured data for agents and integrations: [/a
 - LinkedIn — [linkedin.com/in/kmshack](https://www.linkedin.com/in/kmshack)
 - X — [@kmshack_kr](https://x.com/kmshack_kr)
 - Threads — [@kmshack](https://threads.net/@kmshack)
-- Email — [kmshack@naver.com](mailto:kmshack@naver.com)

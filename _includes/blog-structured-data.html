@@ -9,7 +9,8 @@
   "url": {{ site.url | append: page.url | jsonify }},
   "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
   "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
-  "author": {"@type": "Person", "name": {{ site.author | jsonify }}, "url": {{ site.author_url | jsonify }}},
+  "author": {"@type": "Person", "@id": "https://kmshack.kr/#person", "name": {{ site.author | jsonify }}, "url": {{ site.author_url | jsonify }}},
+  "mainEntityOfPage": {"@type": "WebPage", "@id": {{ site.url | append: page.url | jsonify }}},
   "inLanguage": {{ site.lang | jsonify }},
   "keywords": {{ page.tags | jsonify }}{% if page.image %},
   "image": [{{ site.url | append: page.image | jsonify }}]{% endif %}

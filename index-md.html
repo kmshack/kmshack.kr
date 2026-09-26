@@ -6,7 +6,7 @@ permalink: /index.md
 {%- assign p = site.data.profile.person -%}
 # {{ p.name }} — {{ p.job_title }}
 
-> {{ p.headline }} Based in {{ p.location.locality }}, {{ p.location.country }}. {{ p.years_of_experience }} years of Android development, 6.1M+ downloads across indie apps, and a Korean-language engineering blog running since 2015.
+> {{ p.headline }} {{ p.years_of_experience }} years of Android development, 6.1M+ downloads across indie apps, and a Korean-language engineering blog running since 2015.
 
 This is the Markdown rendition of <https://kmshack.kr/>. Facts here are generated from the same source as [/api/profile.json](https://kmshack.kr/api/profile.json).
 
@@ -59,7 +59,6 @@ Full archive: <https://kmshack.kr/blog/archive/> · Atom feed: <https://kmshack.
 {% for link in site.data.profile.links -%}
 - {{ link.label }}: <{{ link.url }}>
 {% endfor %}
-- Email: <mailto:{{ p.email }}>
 
 ## For agents
 

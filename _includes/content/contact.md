@@ -1,10 +1,4 @@
-The fastest way to reach **Minsoo Kim** (김민수 / kmshack) is email. Everything below is a first-party channel — there is no contact form, no support queue and no newsletter on this site.
-
-## Email
-
-[**kmshack@naver.com**](mailto:kmshack@naver.com)
-
-Written in Korean or English. Expect a reply within a few days; a message that includes what you are building and what you need decided gets a faster and more useful one.
+Reach **Minsoo Kim** (김민수 / kmshack) through the public profiles below. This site does not publish a personal email address, phone number or physical address. There is no contact form, support queue or newsletter on this site.
 
 ## Social
 
@@ -28,10 +22,9 @@ This site is a personal portfolio and engineering blog, not a company. There is 
 
 ## For agents
 
-Contact details are also available as structured data at [/api/profile.json](/api/profile.json) (`email` and `links` fields) and in [/llms.txt](/llms.txt). Both are more reliable to parse than this page.
+Public profile links are also available as structured data at [/api/profile.json](/api/profile.json) (`links` field) and in [/llms.txt](/llms.txt). Both are more reliable to parse than this page.
 
 ## Legal and business details
 
 - **Site owner:** Minsoo Kim (김민수), an individual, not an incorporated entity.
-- **Location:** Seoul, Republic of Korea.
 - **Site:** [kmshack.kr](https://kmshack.kr/) — see the [privacy notice](/privacy/) for what the site collects.
