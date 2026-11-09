@@ -345,15 +345,23 @@ def check_homepage(fetcher: Fetcher) -> None:
     check("json-ld: present on the homepage", bool(blocks))
     types = set()
     person = None
+    profile = None
     for block in blocks:
         for node in block.get("@graph", [block]):
             node_type = node.get("@type")
             types.add(node_type)
             if node_type == "Person":
                 person = node
+            if node_type == "ProfilePage":
+                profile = node
     check("json-ld: declares a Person", "Person" in types)
     check("json-ld: declares a WebSite", "WebSite" in types)
     check("json-ld: declares a ProfilePage", "ProfilePage" in types)
+    check(
+        "json-ld: ProfilePage.mainEntity references the Person",
+        bool(profile and person and person.get("@id"))
+        and profile.get("mainEntity") == {"@id": person["@id"]},
+    )
     if person:
         for field in ("name", "url", "description", "jobTitle", "image", "sameAs"):
             check(f"json-ld: Person has {field}", bool(person.get(field)))
